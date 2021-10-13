@@ -37,13 +37,13 @@ int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
     
     // Now we can intialize the pixel of 2D array, allocating memory
     int *pixels = ( int * ) malloc( ( *numRows ) * sizeof( int ) );
-    for( i = 0; i < *numRows; i ++)
-    {
-        if ( pixels[i] == NULL )
-        {
-            return NULL;
-        }
-    }
+    // for( i = 0; i < *numRows; i ++)
+    // {
+    //     if ( pixels[i] == NULL )
+    //     {
+    //         return NULL;
+    //     }
+    // }
     
     // read in all pixels into the pixels array.
     // for( i = 0; i < *numRows; i ++ )
