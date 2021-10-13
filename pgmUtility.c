@@ -36,7 +36,7 @@ int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
     sscanf( header[rowsInHeader - 2], "%d %d", numCols, numRows );  // in pgm the first number is # of cols
     
     // Now we can intialize the pixel of 2D array, allocating memory
-    int **pixels = ( int ** ) malloc( ( *numRows ) * sizeof( int * ) );
+    int *pixels = ( int * ) malloc( ( *numRows ) * sizeof( int ) );
     for( i = 0; i < *numRows; i ++)
     {
         pixels[i] = ( int * ) malloc( ( *numCols ) * sizeof( int ) );
