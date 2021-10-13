@@ -147,6 +147,8 @@ int main(int argc, char *argv[]){
         fclose(out);
     if(fp != NULL)
         fclose(fp);
+
+        printf("m: %d, n: %d, x: %d\n", m, n, x);
     return 0;
 }
 
