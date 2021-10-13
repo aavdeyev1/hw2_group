@@ -10,11 +10,6 @@
 // NOTE: Please follow the instructions stated in the write-up regarding the interface of the functions.
 // NOTE: You might have to change the name of this file into pgmUtility.cu if needed.
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "pgmUtility.h"
-
 //---------------------------------------------------------------------------
 int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
 {

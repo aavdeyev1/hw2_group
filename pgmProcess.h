@@ -1,4 +1,7 @@
 
+
+#ifndef pgmProcess_h
+#define pgmProcess_h
 /**
  *  Function Name:
  *      distance()
@@ -9,3 +12,5 @@
  *  @return         return distance between p1 and p2
  */
 __device__ float distance( int p1[], int p2[] );
+
+#endif
