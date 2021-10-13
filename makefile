@@ -8,7 +8,7 @@ pgmProcess.o: pgmProcess.cu pgmProcess.h
 	g++ -c -o pgmProcess.o pgmProcess.cu -I.
 
 
-pgmUtility: pgmUtility.c pgmUtility.h
+pgmUtility.o: pgmUtility.c pgmUtility.h
 	g++ -c -o pgmUtility.o pgmUtility.c -I.
 
 clean:
