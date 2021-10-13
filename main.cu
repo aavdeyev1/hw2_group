@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
                 pixels = pgmRead(header, &numRows, &numCols, fp);
 
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                pgmWrite((const char **)header, (const int **)pixels, numRows, numCols, out );    
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );    
                 break;
             case 'e':  
                 if(argc != 5){
@@ -135,9 +135,9 @@ int main(int argc, char *argv[]){
         }      
     }
 
-    i = 0;
-    for(;i < numRows; i++)
-        free(pixels[i]);
+    // i = 0;
+    // for(;i < numRows; i++)
+    //     free(pixels[i]);
     free(pixels);
     i = 0;
     for(;i < rowsInHeader; i++)
