@@ -6,8 +6,6 @@
 
 #include "pgmUtility.h"
 
-
-
 // Implement or define each function prototypes listed in pgmUtility.h file.
 // NOTE: Please follow the instructions stated in the write-up regarding the interface of the functions.
 // NOTE: You might have to change the name of this file into pgmUtility.cu if needed.
@@ -75,3 +73,32 @@ int pgmWrite( const char **header, const int *pixels, int numRows, int numCols, 
     }
     return 0;
 }
+
+//---------------------------------------------------------------------------
+//
+int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
+                  int centerCol, int radius, char **header )
+{
+
+}
+
+//---------------------------------------------------------------------------
+int pgmDrawEdge( int *pixels, int numRows, int numCols, int edgeWidth, char **header )
+{
+
+}
+
+//---------------------------------------------------------------------------
+
+int pgmDrawLine( int *pixels, int numRows, int numCols, char **header,
+                int p1row, int p1col, int p2row, int p2col )
+{
+
+}
+
+//-------------------------------------------------------------------------------
+double distance( int p1[], int p2[] )
+{
+    return sqrt( pow( p1[0] - p2[0], 2 ) + pow( p1[1] - p2[1], 2 ) );
+}
+
