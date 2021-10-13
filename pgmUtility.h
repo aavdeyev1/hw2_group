@@ -5,8 +5,8 @@
 //  Copyright (c) 2013 Tony Tian. All rights reserved.
 //
 
-#ifndef cscd439pgm_pgmUtility_h
-#define cscd439pgm_pgmUtility_h
+#ifndef pgmUtility_h
+#define pgmUtility_h
 
 #include <math.h>
 
