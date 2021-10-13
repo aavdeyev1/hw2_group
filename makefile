@@ -1,4 +1,4 @@
-image_edit: main.o pgmProcess.o
+image_edit: main.o pgmProcess.o pgmUtility.o
 	nvcc -arch=sm_52 -o lab1 main.o pgmProcess.o  -I.
 
 main.o: main.cu
