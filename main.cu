@@ -16,7 +16,7 @@ int main(int argc, char *argv[]){
 
     char ** header = (char**) malloc( sizeof(char *) * rowsInHeader);
     int i;
-    int ** pixels = NULL;
+    int * pixels = NULL;
     for(i = 0; i < 4; i++){
         header[i] = (char *) malloc (sizeof(char) * maxSizeHeadRow);
     }
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]){
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
-                pgmWrite((const char **)header, (const int **)pixels, numRows, numCols, out );
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 break;
 
             case 'l':  
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]){
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
                 pgmDrawLine(pixels, numRows, numCols, header, p1y, p1x, p2y, p2x);
-                pgmWrite((const char **)header, (const int **)pixels, numRows, numCols, out );
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 break;
         }      
     }
@@ -148,6 +148,9 @@ int main(int argc, char *argv[]){
     if(fp != NULL)
         fclose(fp);
 
+        m = 0;
+        n = 0;
+        x = 0;
         printf("m: %d, n: %d, x: %d\n", m, n, x);
     return 0;
 }
