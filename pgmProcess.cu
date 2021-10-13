@@ -13,5 +13,5 @@
 __device__ float distance( int p1[], int p2[] )
 {
 
-    return (float)(1)
+    return (float)(1);
 }
