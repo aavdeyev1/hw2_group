@@ -39,7 +39,6 @@ int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
     int *pixels = ( int * ) malloc( ( *numRows ) * sizeof( int ) );
     for( i = 0; i < *numRows; i ++)
     {
-        pixels[i] = ( int * ) malloc( ( *numCols ) * sizeof( int ) );
         if ( pixels[i] == NULL )
         {
             return NULL;
@@ -47,10 +46,10 @@ int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
     }
     
     // read in all pixels into the pixels array.
-    for( i = 0; i < *numRows; i ++ )
-        for( j = 0; j < *numCols; j ++ )
-            if ( fscanf(in, "%d ", *( pixels + i ) + j) < 0 )
-                return NULL;
+    // for( i = 0; i < *numRows; i ++ )
+    //     for( j = 0; j < *numCols; j ++ )
+    //         if ( fscanf(in, "%d ", *( pixels + i ) + j) < 0 )
+    //             return NULL;
     
     return pixels;
 }
