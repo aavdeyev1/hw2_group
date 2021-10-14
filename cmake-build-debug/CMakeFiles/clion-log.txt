@@ -1,0 +1,4 @@
+/Applications/CMake.app/Contents/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /Users/gabeanderson/CLionProjects/hw2_group
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/gabeanderson/CLionProjects/hw2_group/cmake-build-debug
