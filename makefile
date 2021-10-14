@@ -1,21 +1,51 @@
-CC=nvcc
-CFLAGS=-I.
-DEPS = pgmUtility.h pgmProcess.h 
+NVCC = /usr/local/cuda/bin/nvcc
+CXX = g++
 
-%.o: %.c $(DEPS)
-	$(CC) -O2 -c -o $@ $< $(CFLAGS)
+# here are all the objects
+GPUOBJS = pgmProcess.o pgmUtility.o pgmUtilityGPU.o
+OBJS = main.o
 
-imRead: main.o pgmUtility.o pgmProcess.o
-			nvcc -arch=sm_30 -o imRead pgmUtility.o pgmProcess.o main.o
+imRead: $(OBJS) $(GPUOBJS)
+		$(NVCC) -arch=sm_30 -o imRead $(OBJS) $(GPUOBJS) 
 
-main.o: main.cu
-			nvcc -arch=sm_30 -c main.cu
+main.o: main.c
+		$(CXX) -c main.c
 
-pgmProcess.o: pgmProcess.cu
-			nvcc -arch=sm_30 -c pgmProcess.cu
+pgmProcess.o: pgmProcess.cu pgmProcess.h
+		$(NVCC) -arch=sm_30 -c pgmProcess.cu
 
 pgmUtility.o: pgmUtility.c pgmUtility.h
-			g++ -c -x c++ pgmUtility.c -I.
+		$(CXX) -c -x c++ pgmUtility.c -I.
+
+pgmUtilityGPU.o: pgmUtilityGPU.cu pgmUtility.h
+		$(NVCC) -arch=sm_30 -c pgmUtilityGPU.cu
 
 clean:
-			rm -r *.o lab1
+	rm -f *.o
+	rm -f imRead
+
+
+# Build tools
+# NVCC = /usr/local/cuda/bin/nvcc
+# CXX = g++
+
+# # here are all the objects
+# GPUOBJS = vecAdd.o hostFun.o 
+# OBJS = main.o
+
+# # make and compile
+# myVec:$(OBJS) $(GPUOBJS)
+# 	$(NVCC) -arch=sm_30 -o myVec $(OBJS) $(GPUOBJS) 
+
+# vecAdd.o: vecAdd.cu
+# 	$(NVCC) -arch=sm_30 -c vecAdd.cu 
+
+# hostFun.o: hostFun.cu
+# 	$(NVCC) -arch=sm_30 -c hostFun.cu
+
+# main.o: main.c
+# 	$(CXX) -c main.c
+
+# clean:
+# 	rm -f *.o
+# 	rm -f myVec

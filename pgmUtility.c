@@ -44,7 +44,8 @@ int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
     // read in all pixels into the pixels array.
     for( i = 0; i < *numRows; i ++ )
         for( j = 0; j < *numCols; j ++ )
-            if ( fscanf(in, "%d ", pixels[(i * *numCols + j)] < 0)) //(i * numCol + j)
+            if ( fscanf(in, "%d ", &pixels[i * *numCols + j]) < 0) // Causing error
+            //(i * numCol + j)
                 return NULL;
 
     return pixels;
@@ -100,5 +101,18 @@ int pgmDrawLine( int *pixels, int numRows, int numCols, char **header,
 double distance( int p1[], int p2[] )
 {
     return sqrt( pow( p1[0] - p2[0], 2 ) + pow( p1[1] - p2[1], 2 ) );
+}
+
+// print array 
+void printArr(int *a, int dimy, int dimx)
+{
+    printf("==============================================================================\n");
+    for(int row=0; row<dimy; row++)
+    {
+        for(int col=0; col<dimx; col++)
+            printf("%-4d ", a[row*dimx+col] );
+        printf("\n");
+    }
+    printf("==============================================================================\n");
 }
 

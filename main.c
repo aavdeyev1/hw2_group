@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
+#include <string.h>
+// #include "cuda_runtime.h"
+// #include "device_launch_parameters.h"
 #include "pgmUtility.h"
+#include "pgmUtilityGPU.h"
 #include "pgmProcess.h"
 
 void usage();
@@ -12,11 +14,13 @@ void usage();
 int main(int argc, char *argv[]){
 
     FILE * fp = NULL;
-    FILE * out = NULL; 
+    FILE * out = NULL;
+    FILE * outGPU = NULL; 
 
     char ** header = (char**) malloc( sizeof(char *) * rowsInHeader);
     int i;
     int * pixels = NULL;
+    int * pixelsGPU = NULL;
     for(i = 0; i < 4; i++){
         header[i] = (char *) malloc (sizeof(char) * maxSizeHeadRow);
     }
@@ -69,12 +73,25 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
+                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
+                if(outGPU == NULL){
+                    usage();
+                    fclose(fp);
+                    return 1;
+                }
 
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
+                pixelsGPU = pixels;
 
+                // CPU
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );    
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
+
+                // GPU
+                // pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
+                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
+
                 break;
             case 'e':  
                 if(argc != 5){
@@ -95,10 +112,24 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
+                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
+                if(outGPU == NULL){
+                    usage();
+                    fclose(fp);
+                    return 1;
+                }
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
+                pixelsGPU = pixels;
+
+                // CPU
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
+                
+                // GPU
+                // pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
+                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+                
                 break;
 
             case 'l':  
@@ -127,18 +158,34 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
+                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
+                if(outGPU == NULL){
+                    usage();
+                    fclose(fp);
+                    return 1;
+                }
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
+                pixelsGPU = pixels;
+
+                // CPU
                 pgmDrawLine(pixels, numRows, numCols, header, p1y, p1x, p2y, p2x);
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
+                
+                // GPU
+                // pgmDrawLineGPU(pixelsGPU, numRows, numCols, header, p1y, p1x, p2y, p2x);
+                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+                
                 break;
         }      
     }
 
+    // Not needed for 1D representation
     // i = 0;
     // for(;i < numRows; i++)
     //     free(pixels[i]);
     free(pixels);
+    free(pixelsGPU);
     i = 0;
     for(;i < rowsInHeader; i++)
         free(header[i]);
@@ -148,10 +195,10 @@ int main(int argc, char *argv[]){
     if(fp != NULL)
         fclose(fp);
 
-        m = 0;
-        n = 0;
-        x = 0;
-        printf("m: %d, n: %d, x: %d\n", m, n, x);
+    m = 0;
+    n = 0;
+    x = 0;
+    printf("m: %d, n: %d, x: %d\n", m, n, x);
     return 0;
 }
 
