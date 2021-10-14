@@ -44,7 +44,8 @@ int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
     // read in all pixels into the pixels array.
     for( i = 0; i < *numRows; i ++ )
         for( j = 0; j < *numCols; j ++ )
-            if ( fscanf(in, "%d ", &pixels[(i * *numCols + j)] < 0)) //(i * numCol + j)
+            if ( fscanf(in, "%d ", &pixels[i * *numCols + j]) < 0) // Causing error
+            //(i * numCol + j)
                 return NULL;
 
     return pixels;
