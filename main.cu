@@ -135,6 +135,7 @@ int main(int argc, char *argv[]){
         }      
     }
 
+    // Not needed for 1D representation
     // i = 0;
     // for(;i < numRows; i++)
     //     free(pixels[i]);
@@ -148,10 +149,10 @@ int main(int argc, char *argv[]){
     if(fp != NULL)
         fclose(fp);
 
-        m = 0;
-        n = 0;
-        x = 0;
-        printf("m: %d, n: %d, x: %d\n", m, n, x);
+    m = 0;
+    n = 0;
+    x = 0;
+    printf("m: %d, n: %d, x: %d\n", m, n, x);
     return 0;
 }
 

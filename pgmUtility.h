@@ -118,4 +118,7 @@ int pgmDrawLine( int *pixels, int numRows, int numCols, char **header, int p1row
 int pgmWrite( const char **header, const int *pixels, int numRows, int numCols, FILE *out );
 
 
+void printArr(int *a, int dimy, int dimx);
+
+
 #endif
