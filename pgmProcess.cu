@@ -17,6 +17,5 @@ __device__ float distanceSquared( int p1[], int p2[] )
     p1[0] = (float) p1[0];
     p2[1] = (float) p2[1];
     p2[0] = (float) p2[0];
-    float distance = (p1[0] - p2[0])*(p1[0] - p2[0]) + (p1[1] - p2[1])*( p1[1] - p2[1]);
     return (p1[0] - p2[0])*(p1[0] - p2[0]) + (p1[1] - p2[1])*( p1[1] - p2[1]);
 }

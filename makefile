@@ -8,9 +8,6 @@ OBJS = main.o
 imRead: $(OBJS) $(GPUOBJS)
 		$(NVCC) -arch=sm_30 -o imRead $(OBJS) $(GPUOBJS) 
 
-main.o: main.c
-		$(NVCC) -c main.c
-
 pgmProcess.o: pgmProcess.cu pgmProcess.h
 		$(NVCC) -arch=sm_30 -c pgmProcess.cu
 
@@ -19,6 +16,9 @@ pgmUtility.o: pgmUtility.c pgmUtility.h
 
 pgmUtilityGPU.o: pgmUtilityGPU.cu pgmUtility.h
 		$(NVCC) -arch=sm_30 -c pgmUtilityGPU.cu
+
+main.o: main.c
+		$(CXX) -c main.c
 
 clean:
 	rm -f *.o
