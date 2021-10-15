@@ -97,7 +97,7 @@ int main(int argc, char *argv[]){
                 // pixelsGPU = pixels;
 
                 // CPU
-                // pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
+                pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
