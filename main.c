@@ -88,16 +88,17 @@ int main(int argc, char *argv[]){
 
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
+                printArr(pixels, numRows, numCols);
                 // int p1[] = {1, 1};
                 // int p2[] = {0, 0};
                 // double distance;
                 // distance =  distanceSquared( p1, p2 );
                 // printf("THIS THE ONE: %f", distance);
-                pixelsGPU = pixels;
+                // pixelsGPU = pixels;
 
                 // CPU
                 // pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
+                // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
                 // pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
