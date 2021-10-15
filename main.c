@@ -13,6 +13,12 @@ void usage();
 
 int main(int argc, char *argv[]){
 
+    int p1[] = {1, 1};
+    int p2[] = {0, 0};
+    double distance;
+    distance =  distanceSquared( p1, p2 );
+    printf("THIS THE ONE: %f", distance);
+    
     FILE * fp = NULL;
     FILE * out = NULL;
     FILE * outGPU = NULL; 
@@ -81,17 +87,17 @@ int main(int argc, char *argv[]){
                 }
 
 
-                // pixels = pgmRead(header, &numRows, &numCols, fp);
-                int p1[] = {1, 1};
-                int p2[] = {0, 0};
-                double distance;
-                distance =  distanceSquared( p1, p2 );
-                printf("THIS THE ONE: %lu", distance);
-                // pixelsGPU = pixels;
+                pixels = pgmRead(header, &numRows, &numCols, fp);
+                // int p1[] = {1, 1};
+                // int p2[] = {0, 0};
+                // double distance;
+                // distance =  distanceSquared( p1, p2 );
+                // printf("THIS THE ONE: %f", distance);
+                pixelsGPU = pixels;
 
-                // // CPU
-                // pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
+                // CPU
+                pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
                 // pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );

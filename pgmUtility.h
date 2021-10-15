@@ -119,6 +119,7 @@ int pgmWrite( const char **header, const int *pixels, int numRows, int numCols, 
 
 
 void printArr(int *a, int dimy, int dimx);
+double distanceSquared( int p1[], int p2[] );
 
 
 #endif

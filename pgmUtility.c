@@ -80,7 +80,17 @@ int pgmWrite( const char **header, const int *pixels, int numRows, int numCols, 
 int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
                   int centerCol, int radius, char **header )
 {
-
+    // int i, j;
+    // for( i = 0; i < numRows; i ++ )
+    // {
+    //     for ( j = 0; j < numCols; j ++ )
+    //     {
+    //         if ( j < numCols - 1 )
+    //             fprintf(out, "%d ", pixels[(i * numCols + j)]);
+    //         else
+    //             fprintf(out, "%d\n", pixels[(i * numCols + j)]);
+    //     }
+    // }
 }
 
 //---------------------------------------------------------------------------
@@ -101,6 +111,16 @@ int pgmDrawLine( int *pixels, int numRows, int numCols, char **header,
 double distance( int p1[], int p2[] )
 {
     return sqrt( pow( p1[0] - p2[0], 2 ) + pow( p1[1] - p2[1], 2 ) );
+}
+
+double distanceSquared( int p1[], int p2[] )
+{
+    p1[1] = (double) p1[1];
+    p1[0] = (double) p1[0];
+    p2[1] = (double) p2[1];
+    p2[0] = (double) p2[0];
+    double distance = (p1[0] - p2[0])*(p1[0] - p2[0]) + (p1[1] - p2[1])*( p1[1] - p2[1]);
+    return distance;
 }
 
 // print array 
