@@ -98,7 +98,7 @@ int main(int argc, char *argv[]){
 
                 // CPU
                 // pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
                 // pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
