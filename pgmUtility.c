@@ -80,17 +80,24 @@ int pgmWrite( const char **header, const int *pixels, int numRows, int numCols, 
 int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
                   int centerCol, int radius, char **header )
 {
-    // int i, j;
-    // for( i = 0; i < numRows; i ++ )
-    // {
-    //     for ( j = 0; j < numCols; j ++ )
-    //     {
-    //         if ( j < numCols - 1 )
-    //             fprintf(out, "%d ", pixels[(i * numCols + j)]);
-    //         else
-    //             fprintf(out, "%d\n", pixels[(i * numCols + j)]);
-    //     }
-    // }
+    int i, j, boo; //boo = ghetto boolean
+
+    for (i = 0; i < numRows; i++) {
+        
+        for (j = 0; j< numCols; j++) {
+            //call the new method here............
+            boo = calcDist(j, i, centerCol, centerRow, radius);
+
+            //if our 'boolean' is 'true'...
+            if (boo == 1) {
+                //change the specified pixel location to black
+                pixels[(i * numCols + j)] = 0;
+            }
+        } //end column for loop (x)
+
+    } //end row for loop (y)
+
+    return 0; // :)
 }
 
 //---------------------------------------------------------------------------
@@ -113,14 +120,26 @@ double distance( int p1[], int p2[] )
     return sqrt( pow( p1[0] - p2[0], 2 ) + pow( p1[1] - p2[1], 2 ) );
 }
 
-double distanceSquared( int p1[], int p2[] )
-{
-    p1[1] = (double) p1[1];
-    p1[0] = (double) p1[0];
-    p2[1] = (double) p2[1];
-    p2[0] = (double) p2[0];
-    double distance = (p1[0] - p2[0])*(p1[0] - p2[0]) + (p1[1] - p2[1])*( p1[1] - p2[1]);
-    return distance;
+//returns either 0 or 1
+//0 = outside of radius; pixel will not be changed
+//1 = within radius bounds; pixel will be changed to black
+int calcDist(int x, int y, int centCol, int centRow, int radius) {
+    int p1[2] = {x, y}; //array to hold our x and y values for given point
+    int p2[2] = {centCol, centRow}; //given centerpoint will never be changed
+    
+    double rad = (double) radius; //variable to hold a double version or radius
+    //for comparisons
+
+    //use distance function to find the distance
+    double dis = distance(p1,p2);
+
+    if (dis <= rad) { //if distance is within radius of center point...
+        return 1; //return 'true'
+    }
+
+    //else if, distance is outside of radius bounds...
+    return 0; //return false
+    
 }
 
 // print array 

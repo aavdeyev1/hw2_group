@@ -11,6 +11,6 @@
  *  @param[in]  p2  coordinates of pixel two, p2[0] is for row number, p2[1] is for column number
  *  @return         return distance between p1 and p2
  */
-// __device__ float distance( int p1[], int p2[] );
+__device__ float distance( int p1[], int p2[] );
 
 #endif
