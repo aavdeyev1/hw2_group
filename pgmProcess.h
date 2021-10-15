@@ -2,6 +2,7 @@
 
 #ifndef pgmProcess_h
 #define pgmProcess_h
+
 /**
  *  Function Name:
  *      distance()

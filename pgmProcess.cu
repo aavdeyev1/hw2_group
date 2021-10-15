@@ -1,6 +1,7 @@
 
 #include "pgmProcess.h"
-
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
 /**
  *  Function Name:
  *      distance()
