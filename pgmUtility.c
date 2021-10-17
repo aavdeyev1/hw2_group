@@ -89,7 +89,7 @@ int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
             boo = calcDist(j, i, centerCol, centerRow, radius);
 
             //if our 'boolean' is 'true'...
-            if (boo == 1) {
+            if (boo) {
                 //change the specified pixel location to black
                 pixels[(i * numCols + j)] = 0;
             }

@@ -16,6 +16,43 @@ int pgmDrawCircleGPU( int *pixels, int numRows, int numCols, int centerRow,
     int centerCol, int radius, char **header )
 {
 
+  //   int *d_a=0, *h_a=0; // device and host pointers
+
+  //   h_a = (int*)malloc(num_bytes);
+  //   cudaMalloc( (void**)&d_a, num_bytes );
+
+  //   if( 0==h_a || 0==d_a )
+  //   {
+  //       printf("couldn't allocate memory\n");
+  //       return 1;
+  //   }
+
+  //   cudaMemset( d_a, 0, num_bytes );
+
+  //   dim3 grid, block;
+  //   block.x = 3;
+  //   block.y = 4;
+  //   grid.x  = ceil( (float)dimx / block.x );
+  //   grid.y  = ceil( (float)dimy / block.y );
+  //   char *somestr = (char *)malloc(9*sizeof(char));
+    
+    
+  //   // Use kernel to fill d_a array
+  //   kernel<<<grid, block>>>( d_a, dimx, dimy );
+  //   cudaMemcpy( h_a, d_a, num_bytes, cudaMemcpyDeviceToHost );
+  //   strcpy(somestr, " kernel ");
+  // // boo = calcDist(j, i, centerCol, centerRow, radius);
+
+  //         //if our 'boolean' is 'true'...
+  //   pixels[(i * numCols + j)] = 0;
+
+  //   free( h_a );
+  //   cudaFree( d_a );
+
+  //   free(somestr);
+
+  return 0; // :)
+
 }
 
 //---------------------------------------------------------------------------
