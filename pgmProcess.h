@@ -13,6 +13,6 @@
  *  @return         return distance between p1 and p2
  */
 __device__ float distanceSquared( int p1[], int p2[] );
-__global__ calcDist(int *pixels, int numRows, int numCols, int centCol, int centRow, int radius);
+__global__ void calcDist(int *pixels, int numRows, int numCols, int centCol, int centRow, int radius);
 
 #endif

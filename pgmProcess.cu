@@ -23,7 +23,7 @@ __device__ float distanceSquared( int p1[], int p2[] )
 //returns either 0 or 1
 //0 = outside of radius; pixel will not be changed
 //1 = within radius bounds; pixel will be changed to black
-__global__ calcDist(int *pixels, int numRows, int numCols, int centCol, int centRow, int radius) {
+__global__ void calcDist(int *pixels, int numRows, int numCols, int centCol, int centRow, int radius) {
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*numCols + ix;
