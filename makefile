@@ -5,6 +5,8 @@ CXX = g++
 GPUOBJS = pgmProcess.o pgmUtility.o pgmUtilityGPU.o
 OBJS = main.o
 
+imRead: $(OBJS) $(GPUOBJS)
+		$(NVCC) -arch=sm_30 -o imRead $(OBJS) $(GPUOBJS) 
 
 pgmProcess.o: pgmProcess.cu pgmProcess.h
 		$(NVCC) -arch=sm_30 -c pgmProcess.cu
@@ -18,8 +20,6 @@ pgmUtilityGPU.o: pgmUtilityGPU.cu pgmUtility.h
 main.o: main.cu
 		$(NVCC) -arch=sm_30 -c main.cu
 
-imRead: $(OBJS) $(GPUOBJS)
-		$(NVCC) -arch=sm_30 -o imRead $(OBJS) $(GPUOBJS) 
 clean:
 	rm -f *.o
 	rm -f imRead
