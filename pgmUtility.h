@@ -119,6 +119,7 @@ int pgmWrite( const char **header, const int *pixels, int numRows, int numCols, 
 
 
 void printArr(int *a, int dimy, int dimx);
+int calcDist(int x, int y, int centCol, int centRow, int radius);
 
 
 #endif

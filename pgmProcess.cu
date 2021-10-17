@@ -1,6 +1,7 @@
 
 #include "pgmProcess.h"
-
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
 /**
  *  Function Name:
  *      distance()
@@ -10,8 +11,11 @@
  *  @param[in]  p2  coordinates of pixel two, p2[0] is for row number, p2[1] is for column number
  *  @return         return distance between p1 and p2
  */
-// __device__ float distance( int p1[], int p2[] )
+// __device__ float distanceSquared( int p1[], int p2[] )
 // {
-
-//     return (float)(1);
+//     p1[1] = (float) p1[1];
+//     p1[0] = (float) p1[0];
+//     p2[1] = (float) p2[1];
+//     p2[0] = (float) p2[0];
+//     return (p1[0] - p2[0])*(p1[0] - p2[0]) + (p1[1] - p2[1])*( p1[1] - p2[1]);
 // }

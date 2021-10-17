@@ -13,6 +13,12 @@ void usage();
 
 int main(int argc, char *argv[]){
 
+    // int p1[] = {1, 1};
+    // int p2[] = {0, 0};
+    // double distance;
+    // distance =  distanceSquared( p1, p2 );
+    // printf("THIS THE ONE: %f", distance);
+    
     FILE * fp = NULL;
     FILE * out = NULL;
     FILE * outGPU = NULL; 
@@ -82,7 +88,13 @@ int main(int argc, char *argv[]){
 
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
-                pixelsGPU = pixels;
+                printArr(pixels, numRows, numCols);
+                // int p1[] = {1, 1};
+                // int p2[] = {0, 0};
+                // double distance;
+                // distance =  distanceSquared( p1, p2 );
+                // printf("THIS THE ONE: %f", distance);
+                // pixelsGPU = pixels;
 
                 // CPU
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
