@@ -18,7 +18,7 @@ pgmUtilityGPU.o: pgmUtilityGPU.cu pgmUtility.h
 		$(NVCC) -arch=sm_30 -c pgmUtilityGPU.cu
 
 main.o: main.cu
-		$(NVCC) -c main.cu
+		$(NVCC) -arch=sm_30 -c main.cu
 
 clean:
 	rm -f *.o
