@@ -98,12 +98,12 @@ int main(int argc, char *argv[]){
 
                 // CPU
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                printArr(out, numRows, numCols);
+                printArr(pixels, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
                 pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                printArr(outGPU, numRows, numCols);
+                printArr(pixels, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
 
                 break;
