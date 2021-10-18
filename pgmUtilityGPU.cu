@@ -18,10 +18,10 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
     int centerCol, int radius, char **header )
 {
 
-    int *d_pixels=0; // device pointers
+    int *h_pixels=0, *d_pixels=0; // device pointers
     int bytes = numRows * numCols * sizeof( int);
 
-  //   h_a = (int*)malloc(num_bytes);
+    h_pixels = (int*)malloc(bytes);
     cudaMalloc( &d_pixels, bytes );
 
     if( 0==d_pixels )
@@ -40,20 +40,20 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
     grid.x  = ceil( (float)numCols / block.x );
     grid.y  = ceil( (float)numRows / block.y );
 
-    // printf("grid: %d, %d\nblock: %d, %d\n", grid.x, grid.y, block.x, block.y);
+    printf("%d, grid: %d, %d\nblock: %d, %d\n", bytes, grid.x, grid.y, block.x, block.y);
     
     
   //   // Use kernel to fill d_a array
-  calcDist<<<grid, block>>>(pixelsGPU, numRows, numCols, centerCol, centerRow, radius);
-  cudaMemcpy( pixelsGPU, d_pixels, bytes, cudaMemcpyDeviceToHost );
-  printArr(pixelsGPU, numRows, numCols);
+  // calcDist<<<grid, block>>>(pixelsGPU, numRows, numCols, centerCol, centerRow, radius);
+  cudaMemcpy( h_pixels, d_pixels, bytes, cudaMemcpyDeviceToHost );
+  printArr(h_pixels numRows, numCols);
   //   strcpy(somestr, " kernel ");
   // // boo = calcDist(j, i, centerCol, centerRow, radius);
 
   //         //if our 'boolean' is 'true'...
   //   pixels[(i * numCols + j)] = 0;
 
-  //   free( h_a );
+    free( h_pixels );
     cudaFree( d_pixels );
 
   //   free(somestr);
