@@ -165,7 +165,7 @@ int main(int argc, char *argv[]){
                 }
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
-                pixelsGPU = pixels;
+                memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
                 // CPU
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
                 printArr(pixels, numRows, numCols);
