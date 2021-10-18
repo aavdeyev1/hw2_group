@@ -168,7 +168,7 @@ int main(int argc, char *argv[]){
                     
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
-                    printf("HERE 1: %d", argc);
+                    printf("HERE 1: %s\n", originalImageName);
                     usage();
                     return 1;
                 }
