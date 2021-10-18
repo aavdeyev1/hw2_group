@@ -57,3 +57,28 @@ __global__ void edgeKernel( int *a, int dimx, int dimy, int w )
 		if(ix<w||iy<w||ix>=(dimx-w)||iy>=(dimy-w))//check if it is on the edge
 				a[idx]  = 0;
 }
+
+
+__global__ void gpuLineDraw(int* array4GPU, int numRows, int numCols, int p1row, int p1col, int p2row, int p2col, float slope, float b, int tempMaxX, int tempMaxY, int tempMinX, int tempMinY, float range) {
+
+    //calculate global X id // use this to determine if in range of the line
+    int xId = threadIdx.x + blockDim.x * blockIdx.x;
+    //calculate global Y id // use this to determine if in range of the line
+    int yId = threadIdx.y + blockDim.y * blockIdx.y;
+    //calculate global thread ID
+    int globalId = xId + (yId * numCols);
+
+
+    //if threads outside range of "2d" array do nothing
+    if (xId < numCols && yId < numRows) {
+        //if threads are within tempMinX <-> tempMaxX and tempMinY <-> tempMaxY
+        if (xId <= tempMaxX && xId >= tempMinX && yId <= tempMaxY && yId >= tempMinY) {//threads within the area where the line is drawn
+            float xVal = (slope * xId + b);//this displays the y value that should be filled in at this X// this is on the line
+            float yVal = (float)yId;//this is the y value we are currently at may or maynot be on the line
+            // if threads y value is on line change to 0
+            if (yVal < xVal + range && yVal > xVal - range) {
+                array4GPU[globalId] = 0;
+            }
+        }
+    }
+}

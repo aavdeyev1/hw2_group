@@ -106,8 +106,13 @@ int main(int argc, char *argv[]){
                     break;
                 }
                 edgeWidth = atoi(argv[2]);
-                strcpy(originalImageName, argv[3]);
-                strcpy(newImageFileName, argv[4]);
+                // Get filenames from command line args
+                strcpy(originalImageName, argv[5]);
+                strcpy(newImageFileName, argv[6]);
+
+                // make GPU filename without .pgm file extension
+                memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
+                    
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
@@ -119,23 +124,25 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
+                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
                     return 1;
                 }
 
+
                 pixels = pgmRead(header, &numRows, &numCols, fp);
-                pixelsGPU = pixels;
+                pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
+                memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
 
                 // CPU
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
                 // GPU
-                // pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
-                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+                pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
+                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 
                 break;
 
@@ -151,9 +158,13 @@ int main(int argc, char *argv[]){
                 p2x = atoi(argv[5]);
 
 
-                strcpy(originalImageName, argv[6]);
-                strcpy(newImageFileName, argv[7]);
+                // Get filenames from command line args
+                strcpy(originalImageName, argv[5]);
+                strcpy(newImageFileName, argv[6]);
 
+                // make GPU filename without .pgm file extension
+                memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
+                    
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
@@ -165,23 +176,25 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
+                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
                     return 1;
                 }
 
-                pixels = pgmRead(header, &numRows, &numCols, fp);
-                pixelsGPU = pixels;
 
+                pixels = pgmRead(header, &numRows, &numCols, fp);
+                pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
+                memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
+                
                 // CPU
                 pgmDrawLine(pixels, numRows, numCols, header, p1y, p1x, p2y, p2x);
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
                 // GPU
-                // pgmDrawLineGPU(pixelsGPU, numRows, numCols, header, p1y, p1x, p2y, p2x);
-                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+                pgmDrawLineGPU(pixelsGPU, numRows, numCols, header, p1y, p1x, p2y, p2x);
+                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 
                 break;
         }      

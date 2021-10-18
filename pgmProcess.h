@@ -18,4 +18,6 @@ __global__ void calcDist(int *pixels, int numRows, int numCols, int centCol, int
 #endif
 // __device__ float distanceSquared( int p1[], int p2[] );
 __global__ void edgeKernel( int *a, int dimx, int dimy, int w );
+__global__ void gpuLineDraw(int* array4GPU, int numRows, int numCols, int p1row, int p1col, int p2row, int p2col, float slope, float b, int tempMaxX, int tempMaxY, int tempMinX, int tempMinY, float range);
+
 #endif

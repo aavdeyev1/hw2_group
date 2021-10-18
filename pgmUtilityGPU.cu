@@ -85,9 +85,60 @@ int pgmDrawEdgeGPU( int *pixels, int numRows, int numCols, int edgeWidth, char *
 
 //---------------------------------------------------------------------------
 
-int pgmDrawLineGPU( int *pixels, int numRows, int numCols, char **header,
-  int p1row, int p1col, int p2row, int p2col )
+int pgmDrawLineGPU( int *pixels, int numRows, int numCols, char **header,  int p1row, int p1col, int p2row, int p2col )
 {
+
+    float slope;
+    float b;
+    int tempMaxX, tempMaxY;
+    int tempMinX, tempMinY;
+
+    slope = ((float)(p2row - p1row)) / ((float)(p2col - p1col));
+    b = p1row - slope * p1col;
+
+    float range = slope / 2;
+    if (slope > -1 || slope < 1) {
+        range = .51;
+    }
+
+    if (p2row < p1row) {
+        tempMinY = p2row;
+        tempMaxY = p1row;
+    }
+    else {
+        tempMinY = p1row;
+        tempMaxY = p2row;
+    }
+    if (p2col < p1col) {
+        tempMinX = p2col;
+        tempMaxX = p1col;
+    }
+    else {
+        tempMinX = p1col;
+        tempMaxX = p2col;
+    }
+
+
+
+    //allocate memory on GPU
+    int* array4Gpu;
+    size_t bytes = (sizeof(int) * numCols * numRows);
+    cudaMalloc(&array4GPU, bytes);
+    //copy memory from CPU - > GPU
+    cudaMemcpy(array4GPU, pixels, bytes, cudaMemcpyHostToDevice);
+    //calculate gridsize and block size
+    dim3 blockDim = (32, 32, 1);// (x,y,z)// 1024 threads a block
+    dim3 gridDim = (ceil(numCols / 32), ceil(numRows / 32), 1);//(x,y,z)
+    //call the kernel
+
+    gpuLineDraw <<< gridDim, blockDim >>> (array4Gpu, numRows, numCols, p1row, p1col, p2row, p2col, slope, b, tempMaxX, tempMaxY, tempMinX, tempMinY, range);
+
+    //copy memory from GPU - > CPU
+    cudaMemcpy(pixels, array4Gpu, bytes, cudaMemcpyDeviceToHost);
+    //free memory from gpu
+    cudaFree(&array4GPU);
+
 
   return 0;
 }
+

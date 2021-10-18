@@ -25,8 +25,7 @@ int pgmDrawEdgeGPU( int *pixels, int numRows, int numCols, int edgeWidth, char *
 
 //---------------------------------------------------------------------------
 
-int pgmDrawLineGPU( int *pixels, int numRows, int numCols, char **header,
-  int p1row, int p1col, int p2row, int p2col );
+int pgmDrawLineGPU( int *pixels, int numRows, int numCols, char **header,  int p1row, int p1col, int p2row, int p2col );
 
 
 #endif
