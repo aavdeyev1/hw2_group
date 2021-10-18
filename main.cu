@@ -141,7 +141,8 @@ int main(int argc, char *argv[]){
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
                 // GPU
-                // pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
+                pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
+                printArr(pixelsGPU, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 
                 break;
