@@ -146,6 +146,9 @@ int main(int argc, char *argv[]){
                 // printArr(pixels, numRows, numCols);
                 strcpy(originalImageName, argv[3]);
                 strcpy(newImageFileName, argv[4]);
+
+                memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
+
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
@@ -157,7 +160,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
+                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
@@ -170,14 +173,14 @@ int main(int argc, char *argv[]){
                 memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
                 // CPU
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
-                printArr(pixels, numRows, numCols);
-                // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
+                // printArr(pixels, numRows, numCols);
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
                 // GPU
                 // printArr(pixelsGPU, numRows, numCols);
                 pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
-                printArr(pixelsGPU, numRows, numCols);
-                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+                // printArr(pixelsGPU, numRows, numCols);
+                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 
                 break;
 
