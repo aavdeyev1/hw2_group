@@ -126,10 +126,70 @@ int pgmDrawEdge( int *pixels, int numRows, int numCols, int edgeWidth, char **he
 
 //---------------------------------------------------------------------------
 
-int pgmDrawLine( int *pixels, int numRows, int numCols, char **header,
-                int p1row, int p1col, int p2row, int p2col )
+int pgmDrawLine(int* pixels, int numRows, int numCols,
+    int p1row, int p1col, int p2row, int p2col) // Removed char** header file
+    //  y1         x1         y2         x2
 {
 
+    // Find equation of line from 2 points given
+    float slope;
+    float b;
+    int tempMaxX, tempMaxY;
+    int tempMinX, tempMinY;
+    float range;
+    slope = ((float)(p2row - p1row)) / ((float)(p2col - p1col));
+    b = p1row - slope * p1col;
+
+    float range = slope / 2;
+    if (slope > -1 || slope < 1) {
+        range = .51;
+    }
+
+
+
+    if (p2row < p1row) {
+        tempMinY = p2row;
+        tempMaxY = p1row;
+    }
+    else {
+        tempMinY = p1row;
+        tempMaxY = p2row;
+    }
+    if (p2col < p1col) {
+        tempMinX = p2col;
+        tempMaxX = p1col;
+    }
+    else {
+        tempMinX = p1col;
+        tempMaxX = p2col;
+    }
+    
+   
+
+    if ((p2col - p1col) == 0) { // This is for vertical line
+
+        for (int i = tempMinY; i <= tempMaxY; i++) {////// for(int i = p1row; i < p2row; i++)
+            pixels[i * numCols + p1col] = 0;
+        }
+    }
+    else if (p2row - p1row == 0) { // This is for horizontal line
+        for (int i = tempMinX; i <= tempMaxX; i++) {
+            pixels[i + (numCols * p1row)] = 0;
+        }
+    }
+    else {        
+        for (int i = tempMinX; i <= tempMaxX; i++) { // i/numRows
+            float xVal = (slope * i + b);
+            for (int j = tempMinY; j <= tempMaxY; j++) {
+                float yVal = (float)j;                
+                if (yVal < xVal + range && yVal > xVal - range) { // Change this so it's less exact and more of a range
+                    pixels[(numCols * j) + (i)] = 0;
+                }
+            }
+        }
+    }
+
+    return 0;
 }
 
 //-------------------------------------------------------------------------------
