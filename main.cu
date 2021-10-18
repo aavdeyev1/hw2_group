@@ -65,21 +65,21 @@ int main(int argc, char *argv[]){
                 circleCenterRow = atoi(argv[2]);
                 circleCenterCol = atoi(argv[3]);
                 radius = atoi(argv[4]);
-                strcpy(originalImageName, argv[5]);
-                strcpy(newImageFileName, argv[6]);
+                strcpy(&originalImageName[strlen(originalImageName) - 5], argv[5]);
+                strcpy(&newImageFileName[strlen(originalImageName) - 5], argv[6]);
 
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
                     return 1;
                 }
-                out = fopen(newImageFileName, "w");
+                out = fopen(strcat(newImageFileName, ".pgm"), "w");
                 if(out == NULL){
                     usage();
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
+                outGPU = fopen(strcat(newImageFileName, "GPU.pgm"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
@@ -88,24 +88,19 @@ int main(int argc, char *argv[]){
 
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
-                // printArr(pixels, numRows, numCols);
-                // int p1[] = {1, 1};
-                // int p2[] = {0, 0};
-                // double distance;
-                // distance =  distanceSquared( p1, p2 );
-                // printf("THIS THE ONE: %f", distance);
                 pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
                 memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
                 printArr(pixelsGPU, numRows, numCols);
                 
                 // CPU
-                // pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                // printArr(pixels, numRows, numCols);
-                // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
+                pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
+                printArr(pixels, numRows, numCols);
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
+                // GPU
                 pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
                 printArr(pixelsGPU, numRows, numCols);
-                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
+                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
 
                 break;
             case 'e':  
