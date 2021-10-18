@@ -107,6 +107,7 @@ int main(int argc, char *argv[]){
                     break;
                 }
                 edgeWidth = atoi(argv[2]);
+                printf("%d\n", edgeWidth);
                 // Get filenames from command line args
                 strcpy(originalImageName, argv[3]);
                 strcpy(newImageFileName, argv[4]);
