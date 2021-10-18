@@ -13,11 +13,6 @@ void usage();
 
 int main(int argc, char *argv[]){
 
-    // int p1[] = {1, 1};
-    // int p2[] = {0, 0};
-    // double distance;
-    // distance =  distanceSquared( p1, p2 );
-    // printf("THIS THE ONE: %f", distance);
     
     FILE * fp = NULL;
     FILE * out = NULL;
@@ -39,7 +34,7 @@ int main(int argc, char *argv[]){
 
     int m, n, l, x, ch;
     int edgeWidth, circleCenterRow, circleCenterCol, radius;
-    char originalImageName[100], newImageFileName[100];
+    char newImageFileName[100], originalImageName[100], newImageFileNameGPU[100];
     if(argc != 5 && argc != 7 && argc != 8)
     {
                 usage();
@@ -65,9 +60,14 @@ int main(int argc, char *argv[]){
                 circleCenterRow = atoi(argv[2]);
                 circleCenterCol = atoi(argv[3]);
                 radius = atoi(argv[4]);
+
+                // Get filenames from command line args
                 strcpy(originalImageName, argv[5]);
                 strcpy(newImageFileName, argv[6]);
 
+                // make GPU filename without .pgm file extension
+                memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
+                    
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
+                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
@@ -88,21 +88,16 @@ int main(int argc, char *argv[]){
 
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
-                printArr(pixels, numRows, numCols);
-                // int p1[] = {1, 1};
-                // int p2[] = {0, 0};
-                // double distance;
-                // distance =  distanceSquared( p1, p2 );
-                // printf("THIS THE ONE: %f", distance);
-                // pixelsGPU = pixels;
-
+                pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
+                memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
+                
                 // CPU
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
-                // pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
+                pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
+                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
 
                 break;
             case 'e':  
@@ -192,10 +187,6 @@ int main(int argc, char *argv[]){
         }      
     }
 
-    // Not needed for 1D representation
-    // i = 0;
-    // for(;i < numRows; i++)
-    //     free(pixels[i]);
     free(pixels);
     free(pixelsGPU);
     i = 0;

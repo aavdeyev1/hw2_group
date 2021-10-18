@@ -31,7 +31,8 @@ int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
     sscanf( header[rowsInHeader - 2], "%d %d", numCols, numRows );  // in pgm the first number is # of cols
 
     // Now we can intialize the pixel of 2D array, allocating memory
-    int *pixels = ( int * ) malloc( ( *numRows ) * ( *numCols) * sizeof( int * ) ); //This is for 1d array
+    // NOT sizeof(int *)!!!
+    int *pixels = ( int * ) malloc( ( *numRows ) * ( *numCols) * sizeof( int )); //This is for 1d array
 //    for( i = 0; i < *numRows; i ++)
 //    {
 //        pixels[i] = ( int * ) malloc( ( *numCols ) * sizeof( int ) );
@@ -89,7 +90,7 @@ int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
             boo = calcDist(j, i, centerCol, centerRow, radius);
 
             //if our 'boolean' is 'true'...
-            if (boo == 1) {
+            if (boo) {
                 //change the specified pixel location to black
                 pixels[(i * numCols + j)] = 0;
             }

@@ -2,6 +2,10 @@
 
 #ifndef pgmUtilityGPU_h
 #define pgmUtilityGPU_h
+
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+
 /**
  *  Function Name:
  *      distance()
