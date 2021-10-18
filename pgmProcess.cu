@@ -39,7 +39,7 @@ __global__ void calcDist(int *pixels, int numRows, int numCols, int centCol, int
     // pixels[idx] = (int)ceil(disSq);
     // pixels[idx] = idx;
 
-    if ((disSq <= (float)(rad * rad)) || ix < numCols) { //if distance is within radius of center point...
+    if ((disSq <= (float)(radius * radius)) || ix < numCols) { //if distance is within radius of center point...
         pixels[idx] = 0;
     }
     
