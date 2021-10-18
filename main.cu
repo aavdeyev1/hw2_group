@@ -133,7 +133,7 @@ int main(int argc, char *argv[]){
                 }
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
-                printArr(pixels, numRows, numCols);
+                // printArr(pixels, numRows, numCols);
                 pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
                 memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
 
