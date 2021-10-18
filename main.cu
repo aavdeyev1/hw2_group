@@ -101,6 +101,7 @@ int main(int argc, char *argv[]){
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
                 printArr(pixels, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
+                pixels = pgmRead(header, &numRows, &numCols, fp);
 
                 // GPU
                 pgmDrawCircleGPU(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
