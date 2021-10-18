@@ -94,12 +94,9 @@ int main(int argc, char *argv[]){
                 // double distance;
                 // distance =  distanceSquared( p1, p2 );
                 // printf("THIS THE ONE: %f", distance);
-                printf("HERE\n");
-                pixelsGPU = ( int * ) malloc( ( numRows ) * ( numCols) * sizeof( int ) );
-                printf("NOT malloc\n");
+                pixelsGPU = ( int * ) malloc( ( numRows ) * ( numCols) * sizeof( int *) );
                 memcpy(pixelsGPU, pixels, ( numRows ) * ( numCols) * sizeof( int ) );
-                printf("NOT memcpy err\n");
-
+                
                 // CPU
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
                 printArr(pixels, numRows, numCols);
