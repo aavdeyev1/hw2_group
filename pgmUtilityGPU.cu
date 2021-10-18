@@ -6,6 +6,8 @@
 #include "pgmUtility.h"
 #include "pgmUtilityGPU.h"
 #include "pgmProcess.h"
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
 
 // Implement or define each function prototypes listed in pgmUtility.h file.
 // NOTE: Please follow the instructions stated in the write-up regarding the interface of the functions.
@@ -121,7 +123,7 @@ int pgmDrawLineGPU( int *pixels, int numRows, int numCols, char **header,  int p
 
 
     //allocate memory on GPU
-    int* array4Gpu;
+    int* array4Gpu=0;
     size_t bytes = (sizeof(int) * numCols * numRows);
     cudaMalloc(&array4GPU, bytes);
     //copy memory from CPU - > GPU
