@@ -148,6 +148,7 @@ int main(int argc, char *argv[]){
 
             case 'l':  
                 if(argc != 8){
+                    printf("HERE: %d", argc);
                     usage();
                     break;
                 }
