@@ -65,10 +65,10 @@ int main(int argc, char *argv[]){
                 circleCenterRow = atoi(argv[2]);
                 circleCenterCol = atoi(argv[3]);
                 radius = atoi(argv[4]);
-                strcpy(&originalImageName[strlen(originalImageName) - 5], argv[5]);
-                strcpy(&newImageFileName[strlen(originalImageName) - 5], argv[6]);
+                strcpy(originalImageName, &argv[5][strlen(argv[5]) - 5]);
+                strcpy(newImageFileName, &argv[6][strlen(argv[6]) - 5]);
 
-                fp = fopen(originalImageName, "r");
+                fp = fopen(strcat(originalImageName, ".pgm"), "r");
                 if(fp == NULL){
                     usage();
                     printf("HERE 1");
