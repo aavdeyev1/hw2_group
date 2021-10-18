@@ -19,10 +19,10 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
 {
 
     int *d_pixels=0; // device pointers
-    int bytes = numRows * numCols * sizeof( int *);
+    int bytes = numRows * numCols * sizeof( int);
 
   //   h_a = (int*)malloc(num_bytes);
-    cudaMalloc( (void**)&d_pixels, bytes );
+    cudaMalloc( &d_pixels, bytes );
 
     if( 0==d_pixels )
     {
@@ -38,7 +38,7 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
     grid.x  = ceil( (float)numCols / block.x );
     grid.y  = ceil( (float)numRows / block.y );
 
-    printf("grid: %d, %d\nblock: %d, %d\n", grid.x, grid.y, block.x, block.y);
+    // printf("grid: %d, %d\nblock: %d, %d\n", grid.x, grid.y, block.x, block.y);
     
     
   //   // Use kernel to fill d_a array
