@@ -30,8 +30,8 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
         return -1;
     }
     
-    cudaMemset( d_pixels, 0, bytes );
-    // cudaMemcpy( d_pixels, pixelsGPU, bytes, cudaMemcpyHostToDevice);
+    // cudaMemset( d_pixels, 0, bytes );
+    cudaMemcpy( d_pixels, pixelsGPU, bytes, cudaMemcpyHostToDevice);
 
     dim3 grid, block;
 
