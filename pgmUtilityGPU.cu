@@ -55,7 +55,7 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
 }
 
 //---------------------------------------------------------------------------
-int pgmDrawEdgeGPU( int *pixels, int numRows, int numCols, int edgeWidth, char **header )
+int pgmDrawEdgeGPU( int *pixelsGPU, int numRows, int numCols, int edgeWidth, char **header )
 {
   //   int *d_pixels=0; // device pointers
   //   int bytes = numRows * numCols * sizeof( int );
