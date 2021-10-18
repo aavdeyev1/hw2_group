@@ -14,22 +14,25 @@
 int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
 {
     int i, j;
+    printf("IN PGNUTILITY 1: %d, %d\n", *numCols, *numRows);
 
     // read in header of the image first
     for( i = 0; i < rowsInHeader; i ++)
     {
         if ( header[i] == NULL )
         {
+            printf("IN PGNUTILITY NULL1: %d, %d\n", *numCols, *numRows);
             return NULL;
         }
         if( fgets( header[i], maxSizeHeadRow, in ) == NULL )
         {
+            printf("IN PGNUTILITY NULL2: %d, %d\n", *numCols, *numRows);
             return NULL;
         }
     }
     // extract rows of pixels and columns of pixels
     sscanf( header[rowsInHeader - 2], "%d %d", numCols, numRows );  // in pgm the first number is # of cols
-
+    printf("IN PGNUTILITY: %d, %d\n", *numCols, *numRows);
     // Now we can intialize the pixel of 2D array, allocating memory
     // NOT sizeof(int *)!!!
     int *pixels = ( int * ) malloc( ( *numRows ) * ( *numCols) * sizeof( int )); //This is for 1d array
@@ -104,15 +107,89 @@ int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
 //---------------------------------------------------------------------------
 int pgmDrawEdge( int *pixels, int numRows, int numCols, int edgeWidth, char **header )
 {
-
+    int changed=0;
+	//itterate through all of the pixels
+	for(int i=0;i<numRows;i++){
+		for(int j=0;j<numCols;j++){
+			//checks if i or j is on the edge
+			if(i<edgeWidth||j<edgeWidth||i>=(numRows-edgeWidth)||j>=(numCols-edgeWidth))
+				if(pixels[(i * numCols + j)]!=0){
+					pixels[(i * numCols + j)]=0;//Set the pixel to black	
+					changed=1;
+				}
+			//printf("%3d",pixels[(i * numCols + j)]);	
+		}	
+		//printf("\n");
+	}
+	return changed;
 }
 
 //---------------------------------------------------------------------------
 
-int pgmDrawLine( int *pixels, int numRows, int numCols, char **header,
-                int p1row, int p1col, int p2row, int p2col )
+int pgmDrawLine(int* pixels, int numRows, int numCols,
+    int p1row, int p1col, int p2row, int p2col) // Removed char** header file
+    //  y1         x1         y2         x2
 {
 
+    // Find equation of line from 2 points given
+    float slope;
+    float b;
+    int tempMaxX, tempMaxY;
+    int tempMinX, tempMinY;
+    float range;
+    slope = ((float)(p2row - p1row)) / ((float)(p2col - p1col));
+    b = p1row - slope * p1col;
+
+    range = slope / 2;
+    if (slope > -1 || slope < 1) {
+        range = .51;
+    }
+
+
+
+    if (p2row < p1row) {
+        tempMinY = p2row;
+        tempMaxY = p1row;
+    }
+    else {
+        tempMinY = p1row;
+        tempMaxY = p2row;
+    }
+    if (p2col < p1col) {
+        tempMinX = p2col;
+        tempMaxX = p1col;
+    }
+    else {
+        tempMinX = p1col;
+        tempMaxX = p2col;
+    }
+    
+   
+
+    if ((p2col - p1col) == 0) { // This is for vertical line
+
+        for (int i = tempMinY; i <= tempMaxY; i++) {////// for(int i = p1row; i < p2row; i++)
+            pixels[i * numCols + p1col] = 0;
+        }
+    }
+    else if (p2row - p1row == 0) { // This is for horizontal line
+        for (int i = tempMinX; i <= tempMaxX; i++) {
+            pixels[i + (numCols * p1row)] = 0;
+        }
+    }
+    else {        
+        for (int i = tempMinX; i <= tempMaxX; i++) { // i/numRows
+            float xVal = (slope * i + b);
+            for (int j = tempMinY; j <= tempMaxY; j++) {
+                float yVal = (float)j;                
+                if (yVal < xVal + range && yVal > xVal - range) { // Change this so it's less exact and more of a range
+                    pixels[(numCols * j) + (i)] = 0;
+                }
+            }
+        }
+    }
+
+    return 0;
 }
 
 //-------------------------------------------------------------------------------
