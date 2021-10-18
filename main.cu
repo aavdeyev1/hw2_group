@@ -107,18 +107,44 @@ int main(int argc, char *argv[]){
                     break;
                 }
                 edgeWidth = atoi(argv[2]);
-                printf("%d\n", edgeWidth);
-                // Get filenames from command line args
+                // printf("%d\n", edgeWidth);
+                // // Get filenames from command line args
+                // strcpy(originalImageName, argv[3]);
+                // strcpy(newImageFileName, argv[4]);
+
+                // printf("%s: %s\n", originalImageName, newImageFileName);
+
+                // // make GPU filename without .pgm file extension
+                // memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
+                
+                // printf("%s: %s: %s\n", originalImageName, newImageFileName, newImageFileNameGPU);
+
+                // fp = fopen(originalImageName, "r");
+                // if(fp == NULL){
+                //     usage();
+                //     return 1;
+                // }
+                // out = fopen(newImageFileName, "w");
+                // if(out == NULL){
+                //     usage();
+                //     fclose(fp);
+                //     return 1;
+                // }
+                // outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
+                // if(outGPU == NULL){
+                //     usage();
+                //     fclose(fp);
+                //     return 1;
+                // }
+
+                // pixels = pgmRead(header, &numRows, &numCols, fp);
+                // // printArr(pixels, numRows, numCols);
+                // pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
+                // memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
+
+                // printArr(pixels, numRows, numCols);
                 strcpy(originalImageName, argv[3]);
                 strcpy(newImageFileName, argv[4]);
-
-                printf("%s: %s\n", originalImageName, newImageFileName);
-
-                // make GPU filename without .pgm file extension
-                memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
-                
-                printf("%s: %s: %s\n", originalImageName, newImageFileName, newImageFileNameGPU);
-
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
@@ -130,7 +156,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
+                outGPU = fopen(strcat(newImageFileName, "GPU"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
@@ -138,15 +164,11 @@ int main(int argc, char *argv[]){
                 }
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
-                // printArr(pixels, numRows, numCols);
-                pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
-                memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
-
-                printArr(pixels, numRows, numCols);
+                pixelsGPU = pixels;
                 // CPU
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
                 printArr(pixels, numRows, numCols);
-                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
+                // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
                 // GPU
                 // printArr(pixelsGPU, numRows, numCols);
