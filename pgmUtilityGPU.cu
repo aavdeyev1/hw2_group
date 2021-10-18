@@ -17,12 +17,12 @@ int pgmDrawCircleGPU( int *pixels, int numRows, int numCols, int centerRow,
 {
 
     int *d_pixels=0; // device pointers
-    size_t bytes = numRows * numCols * sizeof( int );
+    int bytes = numRows * numCols * sizeof( int );
 
   //   h_a = (int*)malloc(num_bytes);
     cudaMalloc( (void*)&d_pixels, bytes );
 
-    if( 0==h_a || 0==d_a )
+    if( 0==d_pixels )
     {
         printf("couldn't allocate memory\n");
         return 1;
@@ -40,7 +40,7 @@ int pgmDrawCircleGPU( int *pixels, int numRows, int numCols, int centerRow,
     
   //   // Use kernel to fill d_a array
   //   kernel<<<grid, block>>>( d_a, dimx, dimy );
-    cudaMemcpy( pixels, d_pixels, bytes cudaMemcpyDeviceToHost );
+    cudaMemcpy( pixels, d_pixels, bytes, cudaMemcpyDeviceToHost );
   //   strcpy(somestr, " kernel ");
   // // boo = calcDist(j, i, centerCol, centerRow, radius);
 
