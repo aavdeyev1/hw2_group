@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
                 memcpy(newImageFileName, &tempName[strlen(tempName) - 5], strlen(tempName)*sizeof(char));
                 // strcpy(newImageFileName, &argv[6][strlen(argv[6]) - 5]);
 
-                fp = fopen(strcat(originalImageName), "r");
+                fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
                     printf("HERE 1, %s, %s", originalImageName, newImageFileName);
