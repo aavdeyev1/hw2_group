@@ -48,7 +48,7 @@ int pgmDrawCircleGPU( int *pixels, int numRows, int numCols, int centerRow,
   //   pixels[(i * numCols + j)] = 0;
 
   //   free( h_a );
-    cudaFree( d_a );
+    cudaFree( d_pixels );
 
   //   free(somestr);
 
