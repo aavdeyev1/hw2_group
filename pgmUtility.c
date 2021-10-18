@@ -103,7 +103,21 @@ int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
 //---------------------------------------------------------------------------
 int pgmDrawEdge( int *pixels, int numRows, int numCols, int edgeWidth, char **header )
 {
-
+    int changed=0;
+	//itterate through all of the pixels
+	for(int i=0;i<numRows;i++){
+		for(int j=0;j<numCols;j++){
+			//checks if i or j is on the edge
+			if(i<edgeWidth||j<edgeWidth||i>=(numRows-edgeWidth)||j>=(numCols-edgeWidth))
+				if(pixels[(i * numCols + j)]!=0){
+					pixels[(i * numCols + j)]=0;//Set the pixel to black	
+					changed=1;
+				}
+			//printf("%3d",pixels[(i * numCols + j)]);	
+		}	
+		//printf("\n");
+	}
+	return changed;
 }
 
 //---------------------------------------------------------------------------
