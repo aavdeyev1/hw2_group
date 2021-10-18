@@ -67,7 +67,7 @@ int main(int argc, char *argv[]){
                 radius = atoi(argv[4]);
                 strcpy(originalImageName, argv[5]);
                 strcpy(tempName, argv[6]);
-                memcpy(newImageFileName, tempName[strlen(tempName) - 5], strlen(tempName)*sizeof(char));
+                memcpy(newImageFileName, &tempName[strlen(tempName) - 5], strlen(tempName)*sizeof(char));
                 // strcpy(newImageFileName, &argv[6][strlen(argv[6]) - 5]);
 
                 fp = fopen(strcat(originalImageName), "r");
