@@ -202,10 +202,10 @@ int main(int argc, char *argv[]){
                 strcpy(newImageFileName, argv[7]);
 
                 // make GPU filename without .pgm file extension
-                int len = strlen(newImageFileName);
-                printf("HERE 2: %d\n", len );
-                memcpy(newImageFileNameGPU, &newImageFileName, (len )*sizeof(char));
-                printf("HERE 3: %s\n", newImageFileNameGPU);
+                // int len = strlen(newImageFileName);
+                // printf("HERE 2: %d\n", len );
+                // memcpy(newImageFileNameGPU, &newImageFileName, (len -4)*sizeof(char));
+                // printf("HERE 3: %s\n", newImageFileNameGPU);
                     
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
@@ -220,7 +220,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
+                outGPU = fopen(strcat("GPU", newImageFileName), "w");
                 if(outGPU == NULL){
                     printf("HERE 3: %d", argc);
                     usage();
