@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
                 fp = fopen(strcat(originalImageName, ".pgm"), "r");
                 if(fp == NULL){
                     usage();
-                    printf("HERE 1");
+                    printf("HERE 1, %s, %s", originalImageName, newImageFileName);
                     return 1;
                 }
                 out = fopen(strcat(newImageFileName, ".pgm"), "w");
