@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
 
     int m, n, l, x, ch;
     int edgeWidth, circleCenterRow, circleCenterCol, radius;
-    char originalImageName[100], newImageFileName[100];
+    char tempName[100], originalImageName[100], newImageFileName[100];
     if(argc != 5 && argc != 7 && argc != 8)
     {
                 usage();
@@ -65,10 +65,12 @@ int main(int argc, char *argv[]){
                 circleCenterRow = atoi(argv[2]);
                 circleCenterCol = atoi(argv[3]);
                 radius = atoi(argv[4]);
-                strcpy(originalImageName, &argv[5][strlen(argv[5]) - 5]);
-                strcpy(newImageFileName, &argv[6][strlen(argv[6]) - 5]);
+                strcpy(originalImageName, argv[5])
+                strcpy(tempName, argv[6]);
+                memcpy(newImageFileName, tempName[strlen(tempName) - 5], strlen(tempName)*sizeof(char));
+                // strcpy(newImageFileName, &argv[6][strlen(argv[6]) - 5]);
 
-                fp = fopen(strcat(originalImageName, ".pgm"), "r");
+                fp = fopen(strcat(originalImageName), "r");
                 if(fp == NULL){
                     usage();
                     printf("HERE 1, %s, %s", originalImageName, newImageFileName);
