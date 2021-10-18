@@ -200,6 +200,7 @@ int main(int argc, char *argv[]){
                 // Get filenames from command line args
                 strcpy(originalImageName, argv[6]);
                 strcpy(newImageFileName, argv[7]);
+                printf("HERE 2: %s\n", newImageFileName);
 
                 // make GPU filename without .pgm file extension
                 memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
