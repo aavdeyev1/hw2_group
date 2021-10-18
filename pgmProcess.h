@@ -16,3 +16,6 @@ __device__ float distanceSquared( int p1[], int p2[] );
 __global__ void calcDist(int *pixels, int numRows, int numCols, int centCol, int centRow, int radius);
 
 #endif
+// __device__ float distanceSquared( int p1[], int p2[] );
+__global__ void edgeKernel( int *a, int dimx, int dimy, int w );
+#endif
