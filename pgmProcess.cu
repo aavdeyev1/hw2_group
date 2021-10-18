@@ -30,14 +30,9 @@ __global__ void calcDist(int *pixels, int numRows, int numCols, int centCol, int
     
     int p1[2] = {ix, iy}; //array to hold our x and y values for given point
     int p2[2] = {centCol, centRow}; //given centerpoint will never be changed
-    
-    // float rad = (float) radius; //variable to hold a double version or radius
-    //for comparisons
 
     //use distance function to find the distance
     float disSq = distanceSquared(p1, p2);
-    // pixels[idx] = (int)ceil(disSq);
-    // pixels[idx] = idx;
 
     if ((disSq <= (float)(radius * radius )) && ix < numCols) { //if distance is within radius of center point...
         pixels[idx] = 0;
