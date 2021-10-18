@@ -108,7 +108,7 @@ int main(int argc, char *argv[]){
                 edgeWidth = atoi(argv[2]);
                 // Get filenames from command line args
                 strcpy(originalImageName, argv[3]);
-                strcpy(newImageFileName, argv[3]);
+                strcpy(newImageFileName, argv[4]);
 
                 // make GPU filename without .pgm file extension
                 memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
@@ -131,9 +131,11 @@ int main(int argc, char *argv[]){
                     return 1;
                 }
 
-
+                printf("HERE 1: %d", argc);
                 pixels = pgmRead(header, &numRows, &numCols, fp);
+                printf("HERE 2: %d", argc);
                 pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
+                printf("HERE 3: %d", argc);
                 memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
 
                 // CPU
