@@ -14,16 +14,19 @@
 int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
 {
     int i, j;
+    printf("IN PGNUTILITY 1: %d, %d\n", *numCols, *numRows);
 
     // read in header of the image first
     for( i = 0; i < rowsInHeader; i ++)
     {
         if ( header[i] == NULL )
         {
+            printf("IN PGNUTILITY NULL1: %d, %d\n", *numCols, *numRows);
             return NULL;
         }
         if( fgets( header[i], maxSizeHeadRow, in ) == NULL )
         {
+            printf("IN PGNUTILITY NULL2: %d, %d\n", *numCols, *numRows);
             return NULL;
         }
     }

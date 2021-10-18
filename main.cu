@@ -93,11 +93,12 @@ int main(int argc, char *argv[]){
                 
                 // CPU
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
+                printArr(pixels, numRows, numCols);
+                // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
-                pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
+                // pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
+                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
 
                 break;
             case 'e':  
