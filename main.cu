@@ -231,7 +231,7 @@ int main(int argc, char *argv[]){
                 memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
                 
                 // CPU
-                pgmDrawLine(pixels, numRows, numCols, header, p1y, p1x, p2y, p2x);
+                pgmDrawLine(pixels, numRows, numCols, p1y, p1x, p2y, p2x);
                 printArr(pixels, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
