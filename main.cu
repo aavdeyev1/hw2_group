@@ -96,10 +96,11 @@ int main(int argc, char *argv[]){
                 // printf("THIS THE ONE: %f", distance);
                 pixelsGPU = ( int * ) malloc(sizeof(pixels));
                 memcpy(pixelsGPU, pixels, sizeof(pixels));
+                printArr(pixelsGPU, numRows, numCols);
                 
                 // CPU
-                pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                printArr(pixels, numRows, numCols);
+                // pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
+                // printArr(pixels, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
