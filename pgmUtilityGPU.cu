@@ -47,14 +47,15 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
   // calcDist<<<grid, block>>>(pixelsGPU, numRows, numCols, centerCol, centerRow, radius);
   cudaMemcpy( h_pixels, d_pixels, bytes, cudaMemcpyDeviceToHost );
   printArr(h_pixels, numRows, numCols);
+  memcpy(pixelsGPU, h_pixels, bytes);
   //   strcpy(somestr, " kernel ");
   // // boo = calcDist(j, i, centerCol, centerRow, radius);
 
   //         //if our 'boolean' is 'true'...
   //   pixels[(i * numCols + j)] = 0;
 
-    free( h_pixels );
-    cudaFree( d_pixels );
+  free( h_pixels );
+  cudaFree( d_pixels );
 
   //   free(somestr);
 
