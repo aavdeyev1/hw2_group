@@ -175,8 +175,8 @@ int main(int argc, char *argv[]){
                 
                 // GPU
                 // printArr(pixelsGPU, numRows, numCols);
-                // pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
-                // printArr(pixelsGPU, numRows, numCols);
+                pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
+                printArr(pixelsGPU, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 
                 break;
