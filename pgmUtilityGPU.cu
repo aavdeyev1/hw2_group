@@ -21,14 +21,14 @@ int pgmDrawCircleGPU( int *pixels, int numRows, int numCols, int centerRow,
     int bytes = numRows * numCols * sizeof( int );
 
   //   h_a = (int*)malloc(num_bytes);
-    cudaMalloc( &d_pixels, bytes );
+    cudaMalloc( (void**)&d_pixels, bytes );
 
     if( 0==d_pixels )
     {
         printf("couldn't allocate memory\n");
         return -1;
     }
-    cudaMemcpy( d_pixels, bytes, cudaMemcpyHostToDevice);
+    cudaMemcpy( d_pixels, pixels, bytes, cudaMemcpyHostToDevice);
 
     dim3 grid, block;
 
