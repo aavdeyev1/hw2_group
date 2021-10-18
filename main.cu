@@ -95,7 +95,9 @@ int main(int argc, char *argv[]){
                 // distance =  distanceSquared( p1, p2 );
                 // printf("THIS THE ONE: %f", distance);
                 printf("HERE\n");
-                memcpy(pixelsGPU, pixels, ( numRows ) * ( numCols) * sizeof( int *) );
+                pixelsGPU = ( int * ) malloc( ( *numRows ) * ( *numCols) * sizeof( int ) );
+                printf("NOT malloc\n");
+                memcpy(pixelsGPU, pixels, ( numRows ) * ( numCols) * sizeof( int ) );
                 printf("NOT memcpy err\n");
 
                 // CPU
