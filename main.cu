@@ -160,8 +160,8 @@ int main(int argc, char *argv[]){
 
 
                 // Get filenames from command line args
-                strcpy(originalImageName, argv[5]);
-                strcpy(newImageFileName, argv[6]);
+                strcpy(originalImageName, argv[6]);
+                strcpy(newImageFileName, argv[7]);
 
                 // make GPU filename without .pgm file extension
                 memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
