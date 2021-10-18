@@ -29,7 +29,9 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
         printf("couldn't allocate memory\n");
         return -1;
     }
-    cudaMemcpy( d_pixels, pixelsGPU, bytes, cudaMemcpyHostToDevice);
+    
+    cudaMemset( d_pixels, 0, num_bytes );
+    // cudaMemcpy( d_pixels, pixelsGPU, bytes, cudaMemcpyHostToDevice);
 
     dim3 grid, block;
 
