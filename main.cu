@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
 
     int m, n, l, x, ch;
     int edgeWidth, circleCenterRow, circleCenterCol, radius;
-    char tempName[100], originalImageName[100], newImageFileName[100];
+    char newImageFileName[100], originalImageName[100], newImageFileNameGPU[100];
     if(argc != 5 && argc != 7 && argc != 8)
     {
                 usage();
@@ -66,8 +66,8 @@ int main(int argc, char *argv[]){
                 circleCenterCol = atoi(argv[3]);
                 radius = atoi(argv[4]);
                 strcpy(originalImageName, argv[5]);
-                strcpy(tempName, argv[6]);
-                memcpy(newImageFileName, &tempName, (strlen(tempName) - 4 )*sizeof(char));
+                strcpy(newImageFileName, argv[6]);
+                memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
                 // strcpy(newImageFileName, &argv[6][strlen(argv[6]) - 5]);
 
                 printf("HERE 1, %s, %s", originalImageName, newImageFileName);
@@ -77,13 +77,13 @@ int main(int argc, char *argv[]){
                     usage();
                     return 1;
                 }
-                out = fopen(strcat(newImageFileName, ".pgm"), "w");
+                out = fopen(newImageFileName, "w");
                 if(out == NULL){
                     usage();
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileName, "GPU.pgm"), "w");
+                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
