@@ -37,6 +37,8 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
     block.y = 32;
     grid.x  = ceil( (float)numCols / block.x );
     grid.y  = ceil( (float)numRows / block.y );
+
+    printf("grid: %d, %d\nblock: %d, %d\n", grid.x, grid.y, block.x, block.y);
     
     
   //   // Use kernel to fill d_a array
