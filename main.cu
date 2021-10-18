@@ -102,7 +102,7 @@ int main(int argc, char *argv[]){
 
                 break;
             case 'e':  
-                printf("IN CASE\n");
+                // printf("IN CASE\n");
                 if(argc != 5){
                     usage();
                     break;
@@ -165,6 +165,8 @@ int main(int argc, char *argv[]){
                 }
 
                 pixels = pgmRead(header, &numRows, &numCols, fp);
+
+                pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
                 memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
                 // CPU
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
@@ -236,7 +238,7 @@ int main(int argc, char *argv[]){
                 break;
         }      
     }
-    printf("IN FREE\n");
+    // printf("IN FREE\n");
     free(pixels);
     m = 0;
     n = 0;
