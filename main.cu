@@ -205,6 +205,9 @@ int main(int argc, char *argv[]){
     }
 
     free(pixels);
+    m = 0;
+    n = 0;
+    x = 0;
     printf("m: %d, n: %d, x: %d\n", m, n, x);
     free(pixelsGPU);
     i = 0;
@@ -216,9 +219,6 @@ int main(int argc, char *argv[]){
     if(fp != NULL)
         fclose(fp);
 
-    m = 0;
-    n = 0;
-    x = 0;
     printf("m: %d, n: %d, x: %d\n", m, n, x);
     return 0;
 }
