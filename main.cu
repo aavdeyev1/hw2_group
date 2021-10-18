@@ -71,18 +71,21 @@ int main(int argc, char *argv[]){
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
+                    printf("HERE 1");
                     return 1;
                 }
                 out = fopen(strcat(newImageFileName, ".pgm"), "w");
                 if(out == NULL){
                     usage();
                     fclose(fp);
+                    printf("HERE 2");
                     return 1;
                 }
                 outGPU = fopen(strcat(newImageFileName, "GPU.pgm"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
+                    printf("HERE 3");
                     return 1;
                 }
 
