@@ -13,5 +13,5 @@
  *  @return         return distance between p1 and p2
  */
 // __device__ float distanceSquared( int p1[], int p2[] );
-
+__global__ void edgeKernel( int *a, int dimx, int dimy, int w );
 #endif
