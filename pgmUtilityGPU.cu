@@ -46,7 +46,7 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
   //   // Use kernel to fill d_a array
   // calcDist<<<grid, block>>>(pixelsGPU, numRows, numCols, centerCol, centerRow, radius);
   cudaMemcpy( h_pixels, d_pixels, bytes, cudaMemcpyDeviceToHost );
-  printArr(h_pixels numRows, numCols);
+  printArr(h_pixels, numRows, numCols);
   //   strcpy(somestr, " kernel ");
   // // boo = calcDist(j, i, centerCol, centerRow, radius);
 
