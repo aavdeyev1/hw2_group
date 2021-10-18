@@ -40,6 +40,6 @@ __global__ void calcDist(int *pixels, int numRows, int numCols, int centCol, int
 
     // if (disSq <= rad * rad || ix < numCols) { //if distance is within radius of center point...
     //     pixels[idx] = 0;
-    }
+    // }
     
 }
