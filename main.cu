@@ -232,11 +232,12 @@ int main(int argc, char *argv[]){
                 
                 // CPU
                 pgmDrawLine(pixels, numRows, numCols, header, p1y, p1x, p2y, p2x);
-                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
+                printArr(pixelsGPU, numRows, numCols);
+                // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
                 // GPU
-                pgmDrawLineGPU(pixelsGPU, numRows, numCols, header, p1y, p1x, p2y, p2x);
-                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+                // pgmDrawLineGPU(pixelsGPU, numRows, numCols, header, p1y, p1x, p2y, p2x);
+                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 
                 break;
         }      
