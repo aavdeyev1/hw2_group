@@ -113,7 +113,9 @@ int main(int argc, char *argv[]){
 
                 // make GPU filename without .pgm file extension
                 memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
-                    
+                
+                printf("%s: %s: %s\n", originalImageName, newImageFileName, newImageFileNameGPU);
+
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
