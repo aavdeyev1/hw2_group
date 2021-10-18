@@ -205,6 +205,7 @@ int main(int argc, char *argv[]){
     }
 
     free(pixels);
+    printf("m: %d, n: %d, x: %d\n", m, n, x);
     free(pixelsGPU);
     i = 0;
     for(;i < rowsInHeader; i++)
