@@ -102,6 +102,7 @@ int main(int argc, char *argv[]){
 
                 break;
             case 'e':  
+                printf("IN CASE\n");
                 if(argc != 5){
                     usage();
                     break;
