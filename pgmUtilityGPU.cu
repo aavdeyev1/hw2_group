@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "pgmUtilityGPU.h"
+#include "pgmProcess.h"
 
 // Implement or define each function prototypes listed in pgmUtility.h file.
 // NOTE: Please follow the instructions stated in the write-up regarding the interface of the functions.
@@ -38,7 +39,7 @@ int pgmDrawCircleGPU( int *pixels, int numRows, int numCols, int centerRow,
     
     
   //   // Use kernel to fill d_a array
-  calcDist<<<grid, block>>>(pixels, numRows, numCols, centCol, centRow, radius);
+  calcDist<<<grid, block>>>(pixels, numRows, numCols, centerCol, centerRow, radius);
   cudaMemcpy( pixels, d_pixels, bytes, cudaMemcpyDeviceToHost );
   //   strcpy(somestr, " kernel ");
   // // boo = calcDist(j, i, centerCol, centerRow, radius);
