@@ -140,7 +140,7 @@ int pgmDrawLine(int* pixels, int numRows, int numCols,
     slope = ((float)(p2row - p1row)) / ((float)(p2col - p1col));
     b = p1row - slope * p1col;
 
-    float range = slope / 2;
+    range = slope / 2;
     if (slope > -1 || slope < 1) {
         range = .51;
     }
