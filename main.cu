@@ -131,21 +131,20 @@ int main(int argc, char *argv[]){
                     return 1;
                 }
 
-                printf("HERE 1: %d", argc);
                 pixels = pgmRead(header, &numRows, &numCols, fp);
-                printf("HERE 2: %d", argc);
                 pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
-                printf("HERE 3: %d", argc);
                 memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
 
+                printArr(pixels, numRows, numCols);
                 // CPU
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
+                printArr(pixels, numRows, numCols);
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
                 // GPU
-                printArr(pixelsGPU, numRows, numCols);
-                pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
-                printArr(pixelsGPU, numRows, numCols);
+                // printArr(pixelsGPU, numRows, numCols);
+                // pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
+                // printArr(pixelsGPU, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 
                 break;
