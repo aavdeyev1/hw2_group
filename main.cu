@@ -111,6 +111,8 @@ int main(int argc, char *argv[]){
                 strcpy(originalImageName, argv[3]);
                 strcpy(newImageFileName, argv[4]);
 
+                printf("%s: %s\n", originalImageName, newImageFileName);
+
                 // make GPU filename without .pgm file extension
                 memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
                 
