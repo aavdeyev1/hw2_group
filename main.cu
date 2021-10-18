@@ -200,6 +200,7 @@ int main(int argc, char *argv[]){
                 // Get filenames from command line args
                 strcpy(originalImageName, argv[6]);
                 strcpy(newImageFileName, argv[7]);
+                char gpu[] = "GPU";
 
                 // make GPU filename without .pgm file extension
                 // int len = strlen(newImageFileName);
@@ -220,7 +221,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat("GPU", newImageFileName), "w");
+                outGPU = fopen(strcat(gpu, newImageFileName), "w");
                 if(outGPU == NULL){
                     printf("HERE 3: %d", argc);
                     usage();
