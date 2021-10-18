@@ -107,8 +107,8 @@ int main(int argc, char *argv[]){
                 }
                 edgeWidth = atoi(argv[2]);
                 // Get filenames from command line args
-                strcpy(originalImageName, argv[5]);
-                strcpy(newImageFileName, argv[6]);
+                strcpy(originalImageName, argv[3]);
+                strcpy(newImageFileName, argv[3]);
 
                 // make GPU filename without .pgm file extension
                 memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
@@ -141,8 +141,8 @@ int main(int argc, char *argv[]){
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 
                 // GPU
-                pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
-                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+                // pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
+                // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 
                 break;
 
