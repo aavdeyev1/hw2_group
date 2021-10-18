@@ -65,10 +65,13 @@ int main(int argc, char *argv[]){
                 circleCenterRow = atoi(argv[2]);
                 circleCenterCol = atoi(argv[3]);
                 radius = atoi(argv[4]);
+
+                // Get filenames from command line args
                 strcpy(originalImageName, argv[5]);
                 strcpy(newImageFileName, argv[6]);
+
+                // make GPU filename without .pgm file extension
                 memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
-                // strcpy(newImageFileName, &argv[6][strlen(argv[6]) - 5]);
 
                 printf("HERE 1, %s, %s", originalImageName, newImageFileName);
                     
@@ -94,16 +97,16 @@ int main(int argc, char *argv[]){
                 pixels = pgmRead(header, &numRows, &numCols, fp);
                 pixelsGPU = ( int * ) malloc(numCols*numRows*sizeof(int));
                 memcpy(pixelsGPU, pixels, numCols*numRows*sizeof(int));
-                printArr(pixelsGPU, numRows, numCols);
+                // printArr(pixelsGPU, numRows, numCols);
                 
                 // CPU
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                printArr(pixels, numRows, numCols);
+                // printArr(pixels, numRows, numCols);
                 pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
                 // GPU
                 pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                printArr(pixelsGPU, numRows, numCols);
+                // printArr(pixelsGPU, numRows, numCols);
                 pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
 
                 break;
