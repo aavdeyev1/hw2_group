@@ -3,6 +3,7 @@
 #include <math.h>
 #include <string.h>
 
+#include "pgmUtility.h"
 #include "pgmUtilityGPU.h"
 #include "pgmProcess.h"
 
