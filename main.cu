@@ -67,27 +67,26 @@ int main(int argc, char *argv[]){
                 radius = atoi(argv[4]);
                 strcpy(originalImageName, argv[5]);
                 strcpy(tempName, argv[6]);
-                memcpy(newImageFileName, &tempName[strlen(tempName) - 5], strlen(tempName)*sizeof(char));
+                memcpy(newImageFileName, &tempName, (strlen(tempName) - 4 )*sizeof(char));
                 // strcpy(newImageFileName, &argv[6][strlen(argv[6]) - 5]);
 
+                printf("HERE 1, %s, %s", originalImageName, newImageFileName);
+                    
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
                     usage();
-                    printf("HERE 1, %s, %s", originalImageName, newImageFileName);
                     return 1;
                 }
                 out = fopen(strcat(newImageFileName, ".pgm"), "w");
                 if(out == NULL){
                     usage();
                     fclose(fp);
-                    printf("HERE 2");
                     return 1;
                 }
                 outGPU = fopen(strcat(newImageFileName, "GPU.pgm"), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
-                    printf("HERE 3");
                     return 1;
                 }
 
