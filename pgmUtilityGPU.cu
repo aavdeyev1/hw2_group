@@ -39,7 +39,7 @@ int pgmDrawCircleGPU( int *pixelsGPU, int numRows, int numCols, int centerRow,
     grid.x  = ceil( (float)numCols / block.x );
     grid.y  = ceil( (float)numRows / block.y );
 
-    printf("\ngrid: %d, %d\nblock: %d, %d\n", bytes, grid.x, grid.y, block.x, block.y);
+    printf("\ngrid: %d, %d\nblock: %d, %d\n", grid.x, grid.y, block.x, block.y);
     
     calcDist<<<grid, block>>>(d_pixels, numRows, numCols, centerCol, centerRow, radius);
     cudaMemcpy( h_pixels, d_pixels, bytes, cudaMemcpyDeviceToHost );
