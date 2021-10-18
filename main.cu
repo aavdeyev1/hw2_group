@@ -236,7 +236,7 @@ int main(int argc, char *argv[]){
                 break;
         }      
     }
-
+    printf("IN FREE\n");
     free(pixels);
     m = 0;
     n = 0;
