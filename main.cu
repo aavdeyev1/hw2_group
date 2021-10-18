@@ -94,7 +94,7 @@ int main(int argc, char *argv[]){
                 // double distance;
                 // distance =  distanceSquared( p1, p2 );
                 // printf("THIS THE ONE: %f", distance);
-                pixelsGPU = pixels;
+                memcpy(pixelsGPU, pixels, ( *numRows ) * ( *numCols) * sizeof( int ) );
 
                 // CPU
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
