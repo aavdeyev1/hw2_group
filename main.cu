@@ -103,7 +103,6 @@ int main(int argc, char *argv[]){
                 // printArr(pixels, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
 
-                // GPU
                 pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
                 printArr(pixelsGPU, numRows, numCols);
                 // pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
