@@ -28,8 +28,8 @@ __global__ void calcDist(int *pixels, int numRows, int numCols, int centCol, int
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*numCols + ix;
     
-    int p1[2] = {ix, iy}; //array to hold our x and y values for given point
-    int p2[2] = {centCol, centRow}; //given centerpoint will never be changed
+    // int p1[2] = {ix, iy}; //array to hold our x and y values for given point
+    // int p2[2] = {centCol, centRow}; //given centerpoint will never be changed
     
     // float rad = (float) radius; //variable to hold a double version or radius
     //for comparisons
