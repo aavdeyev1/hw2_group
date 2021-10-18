@@ -77,6 +77,7 @@ int pgmDrawEdgeGPU( int *pixelsGPU, int numRows, int numCols, int edgeWidth, cha
   //   grid.x  = ceil( (float)numCols / block.x );
   //   grid.y  = ceil( (float)numRows / block.y );
 
+  
   int *h_pixels=0, *d_pixels=0; // host/device pointers
     int bytes = numRows * numCols * sizeof( int);
 
