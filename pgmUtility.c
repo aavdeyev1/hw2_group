@@ -126,8 +126,8 @@ int pgmDrawEdge( int *pixels, int numRows, int numCols, int edgeWidth, char **he
 
 //---------------------------------------------------------------------------
 
-int pgmDrawLine(int* pixels, int numRows, int numCols,
-    int p1row, int p1col, int p2row, int p2col) // Removed char** header file
+int pgmDrawLine(int* pixels, int numRows, int numCols, char ** header,
+    int p1row, int p1col, int p2row, int p2col)
     //  y1         x1         y2         x2
 {
 
