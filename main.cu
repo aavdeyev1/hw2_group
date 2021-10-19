@@ -32,9 +32,10 @@ int main(int argc, char *argv[]){
     int p2y = 0;
     int p2x = 0;
 
-    int m, n, l, x, ch;
+    int l, x, ch;
     int edgeWidth, circleCenterRow, circleCenterCol, radius;
-    char newImageFileName[100], originalImageName[100], newImageFileNameGPU[100];
+    char newImageFileName[100], originalImageName[100];
+    char gpu[] = "GPU_";
     if(argc != 5 && argc != 7 && argc != 8)
     {
                 usage();
@@ -66,7 +67,7 @@ int main(int argc, char *argv[]){
                 strcpy(newImageFileName, argv[6]);
 
                 // make GPU filename without .pgm file extension
-                memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
+                // memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
                     
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
@@ -79,7 +80,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
+                outGPU = fopen(strcat("gpu", newImageFileName), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
@@ -147,7 +148,7 @@ int main(int argc, char *argv[]){
                 strcpy(originalImageName, argv[3]);
                 strcpy(newImageFileName, argv[4]);
 
-                memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
+                // memcpy(newImageFileNameGPU, &newImageFileName, (strlen(newImageFileName) - 4 )*sizeof(char));
 
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
@@ -160,7 +161,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat(newImageFileNameGPU, "GPU.pgm"), "w");
+                outGPU = fopen(strcat("gpu", newImageFileName), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
@@ -200,7 +201,6 @@ int main(int argc, char *argv[]){
                 // Get filenames from command line args
                 strcpy(originalImageName, argv[6]);
                 strcpy(newImageFileName, argv[7]);
-                char gpu[] = "GPU";
 
                 // make GPU filename without .pgm file extension
                 // int len = strlen(newImageFileName);
@@ -249,10 +249,10 @@ int main(int argc, char *argv[]){
     }
     // printf("IN FREE\n");
     free(pixels);
-    m = 0;
-    n = 0;
-    x = 0;
-    printf("m: %d, n: %d, x: %d\n", m, n, x);
+    // m = 0;
+    // n = 0;
+    // x = 0;
+    // printf("m: %d, n: %d, x: %d\n", m, n, x);
     free(pixelsGPU);
     i = 0;
     for(;i < rowsInHeader; i++)
@@ -263,7 +263,7 @@ int main(int argc, char *argv[]){
     if(fp != NULL)
         fclose(fp);
 
-    printf("m: %d, n: %d, x: %d\n", m, n, x);
+    // printf("m: %d, n: %d, x: %d\n", m, n, x);
     return 0;
 }
 
