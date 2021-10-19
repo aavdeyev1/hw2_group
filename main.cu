@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
     int p2y = 0;
     int p2x = 0;
 
-    int l, x, ch;
+    int l, ch;
     int edgeWidth, circleCenterRow, circleCenterCol, radius;
     char newImageFileName[100], originalImageName[100];
     char gpu[] = "GPU_";
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat("gpu", newImageFileName), "w");
+                outGPU = fopen(strcat(gpu, newImageFileName), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
@@ -161,7 +161,7 @@ int main(int argc, char *argv[]){
                     fclose(fp);
                     return 1;
                 }
-                outGPU = fopen(strcat("gpu", newImageFileName), "w");
+                outGPU = fopen(strcat(gpu, newImageFileName), "w");
                 if(outGPU == NULL){
                     usage();
                     fclose(fp);
