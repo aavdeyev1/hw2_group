@@ -96,8 +96,7 @@ int pgmDrawEdge( int *pixels, int numRows, int numCols, int edgeWidth, char **he
  *
  *  @return         return 1 if max intensity is changed by the drawing, otherwise return 0;
  */
-// int pgmDrawLine( int *pixels, int numRows, int numCols, char **header, int p1row, int p1col, int p2row, int p2col );
-int pgmDrawLine(int* pixels, int numRows, int numCols,
+int pgmDrawLine(int* pixels, int numRows, int numCols, char ** header,
     int p1row, int p1col, int p2row, int p2col);
 
 
@@ -120,6 +119,7 @@ int pgmWrite( const char **header, const int *pixels, int numRows, int numCols, 
 
 
 void printArr(int *a, int dimy, int dimx);
+
 int calcDist(int x, int y, int centCol, int centRow, int radius);
 
 

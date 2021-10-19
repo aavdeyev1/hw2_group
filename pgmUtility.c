@@ -14,36 +14,24 @@
 int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
 {
     int i, j;
-    printf("IN PGNUTILITY 1: %d, %d\n", *numCols, *numRows);
 
     // read in header of the image first
     for( i = 0; i < rowsInHeader; i ++)
     {
         if ( header[i] == NULL )
         {
-            printf("IN PGNUTILITY NULL1: %d, %d\n", *numCols, *numRows);
             return NULL;
         }
         if( fgets( header[i], maxSizeHeadRow, in ) == NULL )
         {
-            printf("IN PGNUTILITY NULL2: %d, %d\n", *numCols, *numRows);
             return NULL;
         }
     }
     // extract rows of pixels and columns of pixels
     sscanf( header[rowsInHeader - 2], "%d %d", numCols, numRows );  // in pgm the first number is # of cols
-    printf("IN PGNUTILITY: %d, %d\n", *numCols, *numRows);
+
     // Now we can intialize the pixel of 2D array, allocating memory
-    // NOT sizeof(int *)!!!
     int *pixels = ( int * ) malloc( ( *numRows ) * ( *numCols) * sizeof( int )); //This is for 1d array
-//    for( i = 0; i < *numRows; i ++)
-//    {
-//        pixels[i] = ( int * ) malloc( ( *numCols ) * sizeof( int ) );
-//        if ( pixels[i] == NULL )
-//        {
-//            return NULL;
-//        }
-//    }
 
     // read in all pixels into the pixels array.
     for( i = 0; i < *numRows; i ++ )
@@ -84,7 +72,7 @@ int pgmWrite( const char **header, const int *pixels, int numRows, int numCols, 
 int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
                   int centerCol, int radius, char **header )
 {
-    int i, j, boo; //boo = ghetto boolean
+    int i, j, boo; //boo = boolean
 
     for (i = 0; i < numRows; i++) {
         
@@ -108,7 +96,7 @@ int pgmDrawCircle( int *pixels, int numRows, int numCols, int centerRow,
 int pgmDrawEdge( int *pixels, int numRows, int numCols, int edgeWidth, char **header )
 {
     int changed=0;
-	//itterate through all of the pixels
+	//iterate through all of the pixels
 	for(int i=0;i<numRows;i++){
 		for(int j=0;j<numCols;j++){
 			//checks if i or j is on the edge
@@ -117,17 +105,17 @@ int pgmDrawEdge( int *pixels, int numRows, int numCols, int edgeWidth, char **he
 					pixels[(i * numCols + j)]=0;//Set the pixel to black	
 					changed=1;
 				}
-			//printf("%3d",pixels[(i * numCols + j)]);	
-		}	
-		//printf("\n");
+		
+        }	
+
 	}
 	return changed;
 }
 
 //---------------------------------------------------------------------------
 
-int pgmDrawLine(int* pixels, int numRows, int numCols,
-    int p1row, int p1col, int p2row, int p2col) // Removed char** header file
+int pgmDrawLine(int* pixels, int numRows, int numCols, char ** header,
+    int p1row, int p1col, int p2row, int p2col)
     //  y1         x1         y2         x2
 {
 
@@ -220,7 +208,7 @@ int calcDist(int x, int y, int centCol, int centRow, int radius) {
     
 }
 
-// print array 
+// print array from lab3
 void printArr(int *a, int dimy, int dimx)
 {
     printf("==============================================================================\n");
