@@ -127,8 +127,6 @@ int pgmDrawLineGPU( int *pixels, int numRows, int numCols, char **header,  int p
         tempMaxX = p2col;
     }
 
-
-
     //allocate memory on GPU
     int* array4GPU=0;
     size_t bytes = (sizeof(int) * numCols * numRows);
