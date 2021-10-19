@@ -159,20 +159,17 @@ int main(int argc, char *argv[]){
                     
                 fp = fopen(originalImageName, "r");
                 if(fp == NULL){
-                    printf("HERE 1: %s\n", originalImageName);
                     usage();
                     return 1;
                 }
                 out = fopen(newImageFileName, "w");
                 if(out == NULL){
-                    printf("HERE 2: %d", argc);
                     usage();
                     fclose(fp);
                     return 1;
                 }
                 outGPU = fopen(strcat(gpu, newImageFileName), "w");
                 if(outGPU == NULL){
-                    printf("HERE 3: %d", argc);
                     usage();
                     fclose(fp);
                     return 1;

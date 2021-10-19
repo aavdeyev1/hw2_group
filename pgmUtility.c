@@ -14,25 +14,21 @@
 int * pgmRead( char **header, int *numRows, int *numCols, FILE *in )
 {
     int i, j;
-    printf("IN PGNUTILITY 1: %d, %d\n", *numCols, *numRows);
 
     // read in header of the image first
     for( i = 0; i < rowsInHeader; i ++)
     {
         if ( header[i] == NULL )
         {
-            printf("IN PGNUTILITY NULL1: %d, %d\n", *numCols, *numRows);
             return NULL;
         }
         if( fgets( header[i], maxSizeHeadRow, in ) == NULL )
         {
-            printf("IN PGNUTILITY NULL2: %d, %d\n", *numCols, *numRows);
             return NULL;
         }
     }
     // extract rows of pixels and columns of pixels
     sscanf( header[rowsInHeader - 2], "%d %d", numCols, numRows );  // in pgm the first number is # of cols
-    printf("IN PGNUTILITY: %d, %d\n", *numCols, *numRows);
 
     // Now we can intialize the pixel of 2D array, allocating memory
     int *pixels = ( int * ) malloc( ( *numRows ) * ( *numCols) * sizeof( int )); //This is for 1d array
