@@ -33,6 +33,8 @@ int main(int argc, char *argv[]){
     long double diffCPU;
     long double diffGPU;
 
+    long double speedUpTime;
+
 
     FILE * fp = NULL;
     FILE * out = NULL;
@@ -115,24 +117,30 @@ int main(int argc, char *argv[]){
                 startCPU = clock();
                 cpuStart = (double) startCPU/CLOCKS_PER_SEC;
                 pgmDrawCircle(pixels, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
                 endCPU = clock();
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );  
+                
                 cpuEnd = (double) endCPU/CLOCKS_PER_SEC;
                 // GPU
                 startGPU = clock();
                 gpuStart = (double) startGPU/CLOCKS_PER_SEC;               
                 pgmDrawCircleGPU(pixelsGPU, numRows, numCols, circleCenterRow, circleCenterCol, radius, header );
-                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );  
                 endGPU = clock();
+                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );                
                 gpuEnd = (double) endGPU/CLOCKS_PER_SEC;
 
 
                 diffCPU = cpuEnd - cpuStart;
                 diffGPU = gpuEnd - gpuStart;
+                speedUpTime = diffCPU/diffGPU;
+
+
 
                 //then send them all to the an output file
                 myfile << "CPU Process Time: " << diffCPU << "\n";
                 myfile << "GPU Process Time: " << diffGPU << "\n\n";
+                myfile << "Speed Up Time: " << speedUpTime << "\n\n";
+
                 myfile.close();                                
 
                 break;
@@ -173,23 +181,28 @@ int main(int argc, char *argv[]){
                 startCPU = clock();
                 cpuStart = (double) startCPU/CLOCKS_PER_SEC;
                 pgmDrawEdge(pixels, numRows, numCols, edgeWidth, header);
-                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 endCPU = clock();
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
+
                 cpuEnd = (double) endCPU/CLOCKS_PER_SEC;
                 // GPU
                 startGPU = clock();
                 gpuStart = (double) startGPU/CLOCKS_PER_SEC;
                 pgmDrawEdgeGPU(pixelsGPU, numRows, numCols, edgeWidth, header);
-                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 endGPU = clock();
+                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+
                 gpuEnd = (double) endGPU/CLOCKS_PER_SEC;
 
                 diffCPU = cpuEnd - cpuStart;
                 diffGPU = gpuEnd - gpuStart;
+                speedUpTime = diffCPU/diffGPU;
 
                 //then send them all to the an output file
                 myfile << "CPU Process Time: " << diffCPU << "\n";
                 myfile << "GPU Process Time: " << diffGPU << "\n\n";
+                myfile << "Speed Up Time: " << speedUpTime << "\n\n";
+
                 myfile.close();                                
 
                 break;
@@ -238,23 +251,27 @@ int main(int argc, char *argv[]){
                 startCPU = clock();
                 cpuStart = (double) startCPU/CLOCKS_PER_SEC;                
                 pgmDrawLine(pixels, numRows, numCols, header, p1y, p1x, p2y, p2x);
-                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 endCPU = clock();
+                pgmWrite((const char **)header, (const int *)pixels, numRows, numCols, out );
                 cpuEnd = (double) endCPU/CLOCKS_PER_SEC;               
                 // GPU
                 startGPU = clock();
                 gpuStart = (double) startGPU/CLOCKS_PER_SEC;                
                 pgmDrawLineGPU(pixelsGPU, numRows, numCols, header, p1y, p1x, p2y, p2x);
-                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
                 endGPU = clock();
+                pgmWrite((const char **)header, (const int *)pixelsGPU, numRows, numCols, outGPU );
+
                 gpuEnd = (double) endGPU/CLOCKS_PER_SEC;
 
                 diffCPU = cpuEnd - cpuStart;
                 diffGPU = gpuEnd - gpuStart;
+                speedUpTime = diffCPU/diffGPU;
 
                 //then send them all to the an output file
                 myfile << "CPU Process Time: " << diffCPU << "\n";
                 myfile << "GPU Process Time: " << diffGPU << "\n\n";
+                myfile << "Speed Up Time: " << speedUpTime << "\n\n";
+
                 myfile.close();                                
                 break;
         }      
