@@ -6,6 +6,8 @@
 #include "pgmUtility.h"
 #include "pgmUtilityGPU.h"
 #include "pgmProcess.h"
+#include <fstream>
+#include <iostream>
 
 void usage();
 
