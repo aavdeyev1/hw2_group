@@ -3,6 +3,10 @@
 #include <math.h>
 #include <time.h>
 #include <string.h>
+
+#include <fstream>
+#include <iostream>
+
 #include "pgmUtility.h"
 #include "pgmUtilityGPU.h"
 #include "pgmProcess.h"
@@ -127,6 +131,7 @@ int main(int argc, char *argv[]){
                 myfile.open ("TimeResults");
                 myfile << "CPU Process Time: " << diffCPU << "\n";
                 myfile << "GPU Process Time: " << diffGPU << "\n\n";
+                myfile.close();                                
 
                 break;
             case 'e':
@@ -183,6 +188,7 @@ int main(int argc, char *argv[]){
                 //then send them all to the an output file
                 myfile << "CPU Process Time: " << diffCPU << "\n";
                 myfile << "GPU Process Time: " << diffGPU << "\n\n";
+                myfile.close();                                
 
                 break;
 
