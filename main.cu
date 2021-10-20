@@ -19,7 +19,7 @@ int main(int argc, char *argv[]){
     // CPU processed files are stored as the filename given in the args
     // GPU processed files are stored under the same filename but prefixed with GPU_
     std::ofstream myfile;
-    myfile.open ("TimeResults");
+    myfile.open ("TimeResults.txt");
     clock_t startCPU;
     double cpuStart;
     clock_t endCPU;
