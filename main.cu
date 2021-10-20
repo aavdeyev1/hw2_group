@@ -17,6 +17,7 @@ int main(int argc, char *argv[]){
     // CPU processed files are stored as the filename given in the args
     // GPU processed files are stored under the same filename but prefixed with GPU_
     std::ofstream myfile;
+    myfile.open ("TimeResults");
     clock_t startCPU;
     double cpuStart;
     clock_t endCPU;
@@ -128,7 +129,6 @@ int main(int argc, char *argv[]){
                 diffGPU = gpuEnd - gpuStart;
 
                 //then send them all to the an output file
-                myfile.open ("TimeResults");
                 myfile << "CPU Process Time: " << diffCPU << "\n";
                 myfile << "GPU Process Time: " << diffGPU << "\n\n";
                 myfile.close();                                
